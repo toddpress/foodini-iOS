@@ -7,6 +7,7 @@
 //
 
 #import "TSPAddIngredientViewController.h"
+#import "TSPRecipeListTableViewController.h"
 #import "TSPTableViewCell.h"
 #import "ToastView.h"
 #import <objc/runtime.h>
@@ -92,6 +93,15 @@
     } else {
         [ToastView showToastInParentView:self.view withText:@"You haven't added any ingrediets" withDuaration:2.0];
         return NO;
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"SegueToShortRecipes"]) {
+        NSString *queryString = [self getQueryString];
+//        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        TSPRecipeListTableViewController *shortRecipeListController = (TSPRecipeListTableViewController *) segue.destinationViewController;
+        shortRecipeListController.queryString = queryString;
     }
 }
 

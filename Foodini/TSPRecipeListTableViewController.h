@@ -10,4 +10,14 @@
 
 @interface TSPRecipeListTableViewController : UITableViewController
 
+//extern NSString *API_SEARCH;
+//extern NSString *API_GET;
+//extern NSString *API_KEY;
+
+@property (weak, nonatomic) NSString *API_SEARCH;
+@property (weak, nonatomic) NSString *API_GET;
+@property (weak, nonatomic) NSString *API_KEY;
+
+@property (weak, nonatomic) NSString *queryString;
+
 @end

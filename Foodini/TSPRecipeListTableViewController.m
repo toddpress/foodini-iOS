@@ -7,10 +7,15 @@
 //
 
 #import "TSPRecipeListTableViewController.h"
+#import "TSPRecipeCellTableViewCell.h"
+#import "TSPRecipeDetailViewController.h"
+#import "AFNetworking.h"
+#import "TSPShortRecipe.h"
 
 @interface TSPRecipeListTableViewController ()
-
+@property NSMutableArray *aRecipes;
 @end
+
 
 @implementation TSPRecipeListTableViewController
 
@@ -20,9 +25,12 @@
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
-    
+
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.API_KEY = @"0051927f71d94e11d2dcdda167b4559c";
+    self.API_SEARCH = @"http://food2fork.com/api/search?key=";
+    [self getShortRecipes];
 }
 
 - (void)didReceiveMemoryWarning
@@ -30,87 +38,81 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+//-(void)viewDidAppear:(BOOL)animated
+//{
+//    //show loader view
+//    [HUD showUIBlockingIndicatorWithText:@"Fetching JSON"];
+//}
+
+#pragma mark - JSON loading
+
+- (void)getShortRecipes {
+    self.aRecipes = [[NSMutableArray alloc] init];
+    NSError *error;
+    NSString *strURL = [NSString stringWithFormat:@"%@%@&q=%@", self.API_SEARCH, self.API_KEY, self.queryString];
+    NSURL *url = [NSURL URLWithString:strURL];
+    NSData* data = [[NSData alloc ] initWithContentsOfURL: url];
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+    
+    for (NSDictionary *recipe in json[@"recipes"]) {
+        TSPShortRecipe *recipeObject = [[TSPShortRecipe alloc] init];
+        recipeObject.title = recipe[@"title"];
+        recipeObject.image_url = recipe[@"image_url"];
+        recipeObject.recipe_id = recipe[@"recipe_id"];
+        [self.aRecipes addObject:recipeObject];
+        NSLog(@"RECIPE: %@", recipeObject);
+    }
+}
 
 #pragma mark - Table view data source
 
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//#warning Potentially incomplete method implementation.
-//    // Return the number of sections.
-//    return 0;
-//}
-//
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//#warning Incomplete method implementation.
-//    // Return the number of rows in the section.
-//    return 0;
-//}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return 1;
+}
 
-/*
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.aRecipes count];
+}
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
     
-    // Configure the cell...
-    
+    TSPRecipeCellTableViewCell *cell = (TSPRecipeCellTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"recipeCell" forIndexPath:indexPath];
+    if (cell == nil) {
+        cell = [[TSPRecipeCellTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"recipeCell"];
+    }
+    TSPShortRecipe *recipe = [self.aRecipes objectAtIndex:indexPath.row];
+    cell.recipeTitle.text = recipe.title;
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        //fetch the image data from the url
+        NSURL *imgURL = [NSURL URLWithString:recipe.image_url];
+        NSData *imageData = [NSData dataWithContentsOfURL:imgURL];
+        
+        //start a UI thread for what we need to update on the UI
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //set the image
+            cell.recipeImage.image = [UIImage imageWithData:imageData];
+        });
+    });
     return cell;
 }
-*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Table view delegate
-
-// In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here, for example:
-    // Create the next view controller.
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:<#@"Nib name"#> bundle:nil];
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:@"SegueToDetail"]){
+    NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
+    TSPShortRecipe *selectedRecipe = [self.aRecipes objectAtIndex:indexPath.row];
+    TSPRecipeDetailViewController *detailController = segue.destinationViewController;
+    detailController.recipeId = selectedRecipe.recipe_id;
+    detailController.title = selectedRecipe.title;
+    }
     
-    // Pass the selected object to the new view controller.
-    
-    // Push the view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
 }
-*/
+//#pragma mark - Table view delegate
+
+
 
 @end
