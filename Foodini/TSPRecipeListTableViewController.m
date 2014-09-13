@@ -9,7 +9,6 @@
 #import "TSPRecipeListTableViewController.h"
 #import "TSPRecipeCellTableViewCell.h"
 #import "TSPRecipeDetailViewController.h"
-#import "AFNetworking.h"
 #import "TSPShortRecipe.h"
 
 @interface TSPRecipeListTableViewController ()
@@ -30,6 +29,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.API_KEY = @"0051927f71d94e11d2dcdda167b4559c";
     self.API_SEARCH = @"http://food2fork.com/api/search?key=";
+    self.API_GET = @"http://food2fork.com/api/get?key=";
     [self getShortRecipes];
 }
 
@@ -103,11 +103,21 @@
 }
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"SegueToDetail"]){
-    NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
-    TSPShortRecipe *selectedRecipe = [self.aRecipes objectAtIndex:indexPath.row];
-    TSPRecipeDetailViewController *detailController = segue.destinationViewController;
-    detailController.recipeId = selectedRecipe.recipe_id;
-    detailController.title = selectedRecipe.title;
+        NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
+        TSPShortRecipe *selectedRecipe = [self.aRecipes objectAtIndex:indexPath.row];
+        TSPRecipeDetailViewController *detailController = segue.destinationViewController;
+        
+        detailController.titleText = selectedRecipe.title;
+        detailController.imageUrl = selectedRecipe.image_url;
+        
+        NSError *error;
+        NSString *strURL = [NSString stringWithFormat:@"%@%@&rId=%@", self.API_GET, self.API_KEY, selectedRecipe.recipe_id];
+        NSURL *url = [NSURL URLWithString:strURL];
+        NSData* data = [[NSData alloc ] initWithContentsOfURL: url];
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+        
+        NSDictionary *recipe = json[@"recipe"];
+        detailController.ingredients = recipe[@"ingredients"];
     }
     
 }
