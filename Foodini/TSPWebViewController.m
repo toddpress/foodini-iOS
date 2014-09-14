@@ -8,6 +8,7 @@
 
 #import "TSPWebViewController.h"
 #import "TSPRecipeListTableViewController.h"
+#import "WebPreferences.h"
 
 @interface TSPWebViewController ()
 
@@ -20,12 +21,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    //load url into webview
+
     NSURL *url = [NSURL URLWithString: self.strUrl];
-    NSLog(@"%@", self.strUrl);
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-    [self.webv loadRequest:urlRequest];
+    self.webv.suppressesIncrementalRendering = @YES;
+
+    @try {
+        [self.webv loadRequest:urlRequest];
+    } @catch(NSException *e) {
+        NSLog(@"%@", e);
+    }
 }
 
 - (void)didReceiveMemoryWarning {

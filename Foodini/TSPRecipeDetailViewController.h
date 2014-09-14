@@ -16,6 +16,6 @@
 
 @property (weak, nonatomic) NSString *titleText;
 @property (weak, nonatomic) NSString *imageUrl;
-@property (strong, nonatomic) NSString *recipeUrl;
+@property (weak, nonatomic) NSString *recipeUrl;
 @property NSArray *ingredients;
 @end

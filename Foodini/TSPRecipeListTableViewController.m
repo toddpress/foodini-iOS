@@ -10,8 +10,11 @@
 #import "TSPRecipeCellTableViewCell.h"
 #import "TSPRecipeDetailViewController.h"
 #import "TSPShortRecipe.h"
+#import "UIView+Borders.h"
 
 @interface TSPRecipeListTableViewController ()
+@property (strong, nonatomic) IBOutlet UILabel *recipeLabel;
+@property (strong, nonatomic) IBOutlet UITableView *recipeTableView;
 @property NSMutableArray *aRecipes;
 @end
 
@@ -22,27 +25,21 @@
 {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.API_KEY = @"8f6eecce87b5e38ec5d0e3b3e7f2191c";
     self.API_SEARCH = @"http://food2fork.com/api/search?key=";
     self.API_GET = @"http://food2fork.com/api/get?key=";
+    
+    self.recipeTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
     [self getShortRecipes];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    
     // Dispose of any resources that can be recreated.
 }
-//-(void)viewDidAppear:(BOOL)animated
-//{
-//    //show loader view
-//    [HUD showUIBlockingIndicatorWithText:@"Fetching JSON"];
-//}
 
 #pragma mark - JSON loading
 
@@ -90,7 +87,6 @@
     }
     TSPShortRecipe *recipe = [self.aRecipes objectAtIndex:indexPath.row];
     cell.recipeTitle.text = recipe.title;
-
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         //fetch the image data from the url
         NSURL *imgURL = [NSURL URLWithString:recipe.image_url];

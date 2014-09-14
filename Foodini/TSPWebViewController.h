@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface TSPWebViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UIWebView *webv;
+@property (weak, nonatomic) IBOutlet UIWebView *webv;
 @property (weak, nonatomic) NSString *strUrl;
 
 @end
