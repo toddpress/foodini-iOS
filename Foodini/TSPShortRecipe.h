@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) NSString *recipe_id;
 @property (strong, nonatomic) NSString *image_url;
+@property (strong, nonatomic) NSString *recipe_url;
 @property (strong, nonatomic) NSString *title;
 
 @end
