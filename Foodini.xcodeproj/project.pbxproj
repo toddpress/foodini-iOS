@@ -16,6 +16,10 @@
 		F72E834E19BE62C200BAE1DB /* ToastView.m in Sources */ = {isa = PBXBuildFile; fileRef = F72E834D19BE62C200BAE1DB /* ToastView.m */; };
 		F73D920719C4489E00C4E92C /* chevron_right.png in Resources */ = {isa = PBXBuildFile; fileRef = F73D920619C4489E00C4E92C /* chevron_right.png */; };
 		F767D83A19C4F30F00D0E467 /* TSPAddIngredientViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F767D83919C4F30F00D0E467 /* TSPAddIngredientViewController.xib */; };
+		F795F3B619C54B75000CE1E1 /* chevron_right_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = F795F3B519C54B75000CE1E1 /* chevron_right_gray.png */; };
+		F795F3B819C54C6A000CE1E1 /* chevron_right_green.png in Resources */ = {isa = PBXBuildFile; fileRef = F795F3B719C54C6A000CE1E1 /* chevron_right_green.png */; };
+		F795F3BC19C550B5000CE1E1 /* TSPWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F795F3BA19C550B5000CE1E1 /* TSPWebViewController.m */; };
+		F795F3BD19C550B5000CE1E1 /* TSPWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F795F3BB19C550B5000CE1E1 /* TSPWebViewController.xib */; };
 		F7B474A419C516C000D0584E /* TSPIngredientCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B474A319C516C000D0584E /* TSPIngredientCell.m */; };
 		F7B474A719C5172800D0584E /* UIView+Borders.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B474A619C5172800D0584E /* UIView+Borders.m */; };
 		F7D5A46519C4DD98002BDF25 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = F7D5A46419C4DD98002BDF25 /* plus.png */; };
@@ -63,6 +67,11 @@
 		F72E834D19BE62C200BAE1DB /* ToastView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToastView.m; sourceTree = "<group>"; };
 		F73D920619C4489E00C4E92C /* chevron_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chevron_right.png; sourceTree = "<group>"; };
 		F767D83919C4F30F00D0E467 /* TSPAddIngredientViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TSPAddIngredientViewController.xib; sourceTree = "<group>"; };
+		F795F3B519C54B75000CE1E1 /* chevron_right_gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chevron_right_gray.png; sourceTree = "<group>"; };
+		F795F3B719C54C6A000CE1E1 /* chevron_right_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chevron_right_green.png; sourceTree = "<group>"; };
+		F795F3B919C550B5000CE1E1 /* TSPWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSPWebViewController.h; sourceTree = "<group>"; };
+		F795F3BA19C550B5000CE1E1 /* TSPWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSPWebViewController.m; sourceTree = "<group>"; };
+		F795F3BB19C550B5000CE1E1 /* TSPWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TSPWebViewController.xib; sourceTree = "<group>"; };
 		F7B474A219C516C000D0584E /* TSPIngredientCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSPIngredientCell.h; sourceTree = "<group>"; };
 		F7B474A319C516C000D0584E /* TSPIngredientCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSPIngredientCell.m; sourceTree = "<group>"; };
 		F7B474A519C5172800D0584E /* UIView+Borders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Borders.h"; sourceTree = "<group>"; };
@@ -176,6 +185,9 @@
 				F7EB821E19BD0DFF00564E72 /* TSPAddIngredientViewController.h */,
 				F7EB821F19BD0DFF00564E72 /* TSPAddIngredientViewController.m */,
 				F767D83919C4F30F00D0E467 /* TSPAddIngredientViewController.xib */,
+				F795F3B919C550B5000CE1E1 /* TSPWebViewController.h */,
+				F795F3BA19C550B5000CE1E1 /* TSPWebViewController.m */,
+				F795F3BB19C550B5000CE1E1 /* TSPWebViewController.xib */,
 			);
 			path = Foodini;
 			sourceTree = "<group>";
@@ -183,6 +195,8 @@
 		F7EB81EA19BCFC2E00564E72 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F795F3B719C54C6A000CE1E1 /* chevron_right_green.png */,
+				F795F3B519C54B75000CE1E1 /* chevron_right_gray.png */,
 				F7D5A46619C4E4EF002BDF25 /* foodini_bg_1.jpg */,
 				F7D5A46419C4DD98002BDF25 /* plus.png */,
 				F73D920619C4489E00C4E92C /* chevron_right.png */,
@@ -293,9 +307,12 @@
 				F767D83A19C4F30F00D0E467 /* TSPAddIngredientViewController.xib in Resources */,
 				F7D5A46519C4DD98002BDF25 /* plus.png in Resources */,
 				F7EB822719BD0E7500564E72 /* TSPRecipeListTableViewController.xib in Resources */,
+				F795F3BD19C550B5000CE1E1 /* TSPWebViewController.xib in Resources */,
 				F7EB821319BCFCB200564E72 /* Main.storyboard in Resources */,
 				F7EB81EE19BCFC2E00564E72 /* InfoPlist.strings in Resources */,
+				F795F3B619C54B75000CE1E1 /* chevron_right_gray.png in Resources */,
 				F7EB81F619BCFC2E00564E72 /* Images.xcassets in Resources */,
+				F795F3B819C54C6A000CE1E1 /* chevron_right_green.png in Resources */,
 				F709531419C2ABED00EF49E6 /* TSPRecipeDetailViewController.xib in Resources */,
 				F73D920719C4489E00C4E92C /* chevron_right.png in Resources */,
 				F7D5A46719C4E4EF002BDF25 /* foodini_bg_1.jpg in Resources */,
@@ -326,6 +343,7 @@
 				F709531319C2ABED00EF49E6 /* TSPRecipeDetailViewController.m in Sources */,
 				F7B474A719C5172800D0584E /* UIView+Borders.m in Sources */,
 				F7EB81F019BCFC2E00564E72 /* main.m in Sources */,
+				F795F3BC19C550B5000CE1E1 /* TSPWebViewController.m in Sources */,
 				F72E834919BE36E500BAE1DB /* TSPTableViewCell.m in Sources */,
 				F7EB822619BD0E7500564E72 /* TSPRecipeListTableViewController.m in Sources */,
 			);

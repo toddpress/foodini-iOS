@@ -60,6 +60,7 @@
             recipeObject.title = recipe[@"title"];
             recipeObject.image_url = recipe[@"image_url"];
             recipeObject.recipe_id = recipe[@"recipe_id"];
+            recipeObject.recipe_url = recipe[@"source_url"];
             [self.aRecipes addObject:recipeObject];
             NSLog(@"RECIPE: %@", recipeObject);
         }
@@ -111,7 +112,8 @@
         
         detailController.titleText = selectedRecipe.title;
         detailController.imageUrl = selectedRecipe.image_url;
-        
+        detailController.recipeUrl = selectedRecipe.recipe_url;
+
         NSError *error;
         NSString *strURL = [NSString stringWithFormat:@"%@%@&rId=%@", self.API_GET, self.API_KEY, selectedRecipe.recipe_id];
         NSURL *url = [NSURL URLWithString:strURL];
@@ -119,6 +121,8 @@
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
         
         NSDictionary *recipe = json[@"recipe"];
+        
+        
         detailController.ingredients = recipe[@"ingredients"];
     }
     

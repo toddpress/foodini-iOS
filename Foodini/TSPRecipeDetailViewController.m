@@ -7,10 +7,12 @@
 //
 
 #import "TSPRecipeDetailViewController.h"
+#import "TSPWebViewController.h"
 #import "TSPIngredientCell.h"
 #import "UIView+Borders.h"
 
 @interface TSPRecipeDetailViewController ()
+
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 
 @end
@@ -29,7 +31,7 @@
                                                                      multiplier:1.0
                                                                        constant:0];
     [self.view addConstraint:leftConstraint];
-    
+
     NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:self.contentView
                                                                        attribute:NSLayoutAttributeTrailing
                                                                        relatedBy:0
@@ -38,7 +40,7 @@
                                                                       multiplier:1.0
                                                                         constant:0];
     [self.view addConstraint:rightConstraint];
-
+    
     self.recipeTitle.text = self.titleText;
 
 
@@ -50,6 +52,8 @@
             self.recipeImage.image = [UIImage imageWithData:imgData];
         });
     });
+    [self.detailsTable addTopBorderWithHeight:1.0f andColor:[UIColor colorWithRed:0.31 green:0.34 blue:0.41 alpha:1]];
+    [self.recipeTitle addBottomBorderWithHeight:1.0f andColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.2]];
     
 }
 
@@ -81,6 +85,13 @@
     
     cell.ingredientLabel.text = ingredient;
     return cell;
+}
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:@"SegueToWebView"]) {
+        TSPWebViewController *wvc = segue.destinationViewController;
+        wvc.strUrl = self.recipeUrl;
+
+    }
 }
 
 @end

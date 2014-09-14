@@ -30,13 +30,16 @@
     bar.tintColor = [UIColor colorWithRed:0.95 green:0.43 blue:0.33 alpha:1];
     
     // Do any additional setup after loading the view from its nib.
-    self.aIngredients = [[NSMutableArray alloc] init];
+    if (self.aIngredients == nil) {
+        self.aIngredients = [[NSMutableArray alloc] init];
+    }
+    
     self.AddIngredientTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     UIColor *teddycolor = [UIColor colorWithRed:0.88 green:0.82 blue:0.75 alpha:0.75];
-    self.AddIngredientTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Whatcha got?" attributes:@{NSForegroundColorAttributeName: teddycolor}];
+    self.AddIngredientTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@" Whatcha got?" attributes:@{NSForegroundColorAttributeName: teddycolor}];
     self.AddIngredientTextField.textColor = [UIColor colorWithRed:0.88 green:0.82 blue:0.75 alpha:1];
-//    [self.AddIngredientTextField becomeFirstResponder];
+    [self.AddIngredientTextField becomeFirstResponder];
     
 }
 
@@ -103,7 +106,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"SegueToShortRecipes"]) {
         NSString *queryString = [self getQueryString];
-//        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         TSPRecipeListTableViewController *shortRecipeListController = (TSPRecipeListTableViewController *) segue.destinationViewController;
         shortRecipeListController.queryString = queryString;
     }
