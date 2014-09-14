@@ -27,7 +27,7 @@
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    self.API_KEY = @"0051927f71d94e11d2dcdda167b4559c";
+    self.API_KEY = @"8f6eecce87b5e38ec5d0e3b3e7f2191c";
     self.API_SEARCH = @"http://food2fork.com/api/search?key=";
     self.API_GET = @"http://food2fork.com/api/get?key=";
     [self getShortRecipes];
@@ -52,15 +52,17 @@
     NSString *strURL = [NSString stringWithFormat:@"%@%@&q=%@", self.API_SEARCH, self.API_KEY, self.queryString];
     NSURL *url = [NSURL URLWithString:strURL];
     NSData* data = [[NSData alloc ] initWithContentsOfURL: url];
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-    
-    for (NSDictionary *recipe in json[@"recipes"]) {
-        TSPShortRecipe *recipeObject = [[TSPShortRecipe alloc] init];
-        recipeObject.title = recipe[@"title"];
-        recipeObject.image_url = recipe[@"image_url"];
-        recipeObject.recipe_id = recipe[@"recipe_id"];
-        [self.aRecipes addObject:recipeObject];
-        NSLog(@"RECIPE: %@", recipeObject);
+    if (data != nil) {
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+        
+        for (NSDictionary *recipe in json[@"recipes"]) {
+            TSPShortRecipe *recipeObject = [[TSPShortRecipe alloc] init];
+            recipeObject.title = recipe[@"title"];
+            recipeObject.image_url = recipe[@"image_url"];
+            recipeObject.recipe_id = recipe[@"recipe_id"];
+            [self.aRecipes addObject:recipeObject];
+            NSLog(@"RECIPE: %@", recipeObject);
+        }
     }
 }
 

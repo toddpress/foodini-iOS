@@ -10,6 +10,7 @@
 #import "TSPRecipeListTableViewController.h"
 #import "TSPTableViewCell.h"
 #import "ToastView.h"
+#import "UIView+Borders.h"
 #import <objc/runtime.h>
 
 @interface TSPAddIngredientViewController ()
@@ -20,20 +21,23 @@
 
 @implementation TSPAddIngredientViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    UINavigationBar *bar = self.navigationController.navigationBar;
+    bar.barTintColor = [UIColor colorWithRed:0.18 green:0.19 blue:0.24 alpha:0.75];
+    bar.translucent = YES;
+    bar.tintColor = [UIColor colorWithRed:0.95 green:0.43 blue:0.33 alpha:1];
+    
     // Do any additional setup after loading the view from its nib.
     self.aIngredients = [[NSMutableArray alloc] init];
+    self.AddIngredientTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    UIColor *teddycolor = [UIColor colorWithRed:0.88 green:0.82 blue:0.75 alpha:0.75];
+    self.AddIngredientTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Whatcha got?" attributes:@{NSForegroundColorAttributeName: teddycolor}];
+    self.AddIngredientTextField.textColor = [UIColor colorWithRed:0.88 green:0.82 blue:0.75 alpha:1];
+//    [self.AddIngredientTextField becomeFirstResponder];
+    
 }
 
 - (void)didReceiveMemoryWarning
