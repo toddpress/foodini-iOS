@@ -11,6 +11,7 @@
 #import "TSPRecipeDetailViewController.h"
 #import "TSPShortRecipe.h"
 #import "UIView+Borders.h"
+#import "Loader.h"
 
 @interface TSPRecipeListTableViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *recipeLabel;
@@ -28,9 +29,8 @@
     self.API_KEY = @"8f6eecce87b5e38ec5d0e3b3e7f2191c";
     self.API_SEARCH = @"http://food2fork.com/api/search?key=";
     self.API_GET = @"http://food2fork.com/api/get?key=";
-    
     self.recipeTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-
+    
     [self getShortRecipes];
 }
 
@@ -42,8 +42,8 @@
 }
 
 #pragma mark - JSON loading
-
 - (void)getShortRecipes {
+    
     self.aRecipes = [[NSMutableArray alloc] init];
     NSError *error;
     NSString *strURL = [NSString stringWithFormat:@"%@%@&q=%@", self.API_SEARCH, self.API_KEY, self.queryString];

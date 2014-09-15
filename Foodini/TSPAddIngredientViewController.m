@@ -11,13 +11,14 @@
 #import "TSPTableViewCell.h"
 #import "ToastView.h"
 #import "UIView+Borders.h"
+#import "Loader.h"
 #import <objc/runtime.h>
 
 @interface TSPAddIngredientViewController ()
-
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *searchRecipesButton;
 @property NSMutableArray *aIngredients;
 @property UINavigationBar *bar;
-@property CGFloat *boundWidth;
+
 @end
 
 @implementation TSPAddIngredientViewController
@@ -25,7 +26,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.boundWidth = 0;
     UIColor *teddycolor = [UIColor colorWithRed:0.88 green:0.82 blue:0.75 alpha:0.75];
     
     // Nav styles, etc...
@@ -37,10 +37,11 @@
     UIView *headerView = [[UIView alloc] init];
     headerView.frame = CGRectMake(53, 7, 107, self.bar.frame.size.height);
     UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"foodini_logo_nav.png"]];
-    imgView.frame = CGRectMake(0, -1, 107, 44);
+    imgView.frame = CGRectMake(0, -2, 107, self.bar.frame.size.height);
     imgView.contentMode = UIViewContentModeScaleAspectFit;
+
     [headerView addSubview:imgView];
-    
+//    [self.navigationController.navigationBar insertSubview:imgView atIndex:1]; // better way for logo in nav, just need to hide it on layout animation
     UIView *navBorder = [[UIView alloc] initWithFrame:CGRectMake(0, _bar.frame.size.height-1, _bar.frame.size.width, 1)];
     
     [navBorder setBackgroundColor:[UIColor colorWithRed:0.89 green:0.94 blue:0.61 alpha:1]];
@@ -68,11 +69,11 @@
 {
     [super viewWillAppear:animated];
 
-    if (self.navigationItem.hidesBackButton) {
-        CGRect frame = self.navigationItem.titleView.frame;
-        frame.origin.x = 10;
-        self.navigationItem.titleView.frame = frame;
-    }
+//    if (self.navigationItem.hidesBackButton) {
+//        CGRect frame = self.navigationItem.titleView.frame;
+//        frame.origin.x = 10;
+//        self.navigationItem.titleView.frame = frame;
+//    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -82,6 +83,7 @@
 }
 
 #pragma mark - handle ingredients
+
 
 - (IBAction)removeIngredient:(id)sender {
     TSPTableViewCell *cell = (TSPTableViewCell *)  objc_getAssociatedObject(sender, @"removeIngredientButton");
@@ -110,10 +112,10 @@
     }
     
     UIView *navBorder = [[UIView alloc] initWithFrame:CGRectMake(0, self.bar.frame.size.height-1,self.bar.frame.size.width, 1)];
-    [navBorder setBackgroundColor:[UIColor colorWithRed:0.31 green:0.34 blue:0.41 alpha:1]];
+    [navBorder setBackgroundColor:[UIColor colorWithRed:0.89 green:0.94 blue:0.61 alpha:1]];
     [navBorder setOpaque:YES];
     [navBorder setTag:666];
-    [self.bar addSubview:navBorder];
+    [self.bar insertSubview:navBorder atIndex:1];
 }
 
 #pragma mark - Table Handling

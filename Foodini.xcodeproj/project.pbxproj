@@ -22,6 +22,8 @@
 		F795F3BD19C550B5000CE1E1 /* TSPWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F795F3BB19C550B5000CE1E1 /* TSPWebViewController.xib */; };
 		F795F3CA19C60FE9000CE1E1 /* Elephont-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = F795F3C919C60FE9000CE1E1 /* Elephont-Light.otf */; };
 		F795F3CC19C61B4F000CE1E1 /* foodini_logo_nav.png in Resources */ = {isa = PBXBuildFile; fileRef = F795F3CB19C61B4F000CE1E1 /* foodini_logo_nav.png */; };
+		F795F3D619C650C6000CE1E1 /* Loader.m in Sources */ = {isa = PBXBuildFile; fileRef = F795F3D519C650C6000CE1E1 /* Loader.m */; };
+		F795F3D719C68379000CE1E1 /* elephont-light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F795F3C319C5FBB6000CE1E1 /* elephont-light.ttf */; };
 		F7B474A419C516C000D0584E /* TSPIngredientCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B474A319C516C000D0584E /* TSPIngredientCell.m */; };
 		F7B474A719C5172800D0584E /* UIView+Borders.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B474A619C5172800D0584E /* UIView+Borders.m */; };
 		F7D5A46519C4DD98002BDF25 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = F7D5A46419C4DD98002BDF25 /* plus.png */; };
@@ -74,10 +76,11 @@
 		F795F3B919C550B5000CE1E1 /* TSPWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSPWebViewController.h; sourceTree = "<group>"; };
 		F795F3BA19C550B5000CE1E1 /* TSPWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSPWebViewController.m; sourceTree = "<group>"; };
 		F795F3BB19C550B5000CE1E1 /* TSPWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TSPWebViewController.xib; sourceTree = "<group>"; };
-		F795F3BE19C5C99E000CE1E1 /* WebPreferences.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WebPreferences.h; path = ../WebPreferences.h; sourceTree = "<group>"; };
 		F795F3C319C5FBB6000CE1E1 /* elephont-light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "elephont-light.ttf"; sourceTree = "<group>"; };
 		F795F3C919C60FE9000CE1E1 /* Elephont-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Elephont-Light.otf"; sourceTree = "<group>"; };
 		F795F3CB19C61B4F000CE1E1 /* foodini_logo_nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = foodini_logo_nav.png; sourceTree = "<group>"; };
+		F795F3D419C650C6000CE1E1 /* Loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Loader.h; sourceTree = "<group>"; };
+		F795F3D519C650C6000CE1E1 /* Loader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Loader.m; sourceTree = "<group>"; };
 		F7B474A219C516C000D0584E /* TSPIngredientCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSPIngredientCell.h; sourceTree = "<group>"; };
 		F7B474A319C516C000D0584E /* TSPIngredientCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSPIngredientCell.m; sourceTree = "<group>"; };
 		F7B474A519C5172800D0584E /* UIView+Borders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Borders.h"; sourceTree = "<group>"; };
@@ -132,6 +135,81 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F795F3CD19C64B4B000CE1E1 /* ObjectClasses */ = {
+			isa = PBXGroup;
+			children = (
+				F709530A19C28DC200EF49E6 /* TSPShortRecipe.h */,
+				F709530B19C28DC200EF49E6 /* TSPShortRecipe.m */,
+			);
+			name = ObjectClasses;
+			sourceTree = "<group>";
+		};
+		F795F3CE19C64BCE000CE1E1 /* HelperClasses */ = {
+			isa = PBXGroup;
+			children = (
+				F7B474A519C5172800D0584E /* UIView+Borders.h */,
+				F7B474A619C5172800D0584E /* UIView+Borders.m */,
+				F72E834C19BE62C200BAE1DB /* ToastView.h */,
+				F72E834D19BE62C200BAE1DB /* ToastView.m */,
+				F795F3D419C650C6000CE1E1 /* Loader.h */,
+				F795F3D519C650C6000CE1E1 /* Loader.m */,
+			);
+			name = HelperClasses;
+			sourceTree = "<group>";
+		};
+		F795F3CF19C64BF9000CE1E1 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				F7B474A219C516C000D0584E /* TSPIngredientCell.h */,
+				F7B474A319C516C000D0584E /* TSPIngredientCell.m */,
+				F72E834719BE36E500BAE1DB /* TSPTableViewCell.h */,
+				F72E834819BE36E500BAE1DB /* TSPTableViewCell.m */,
+				F709530D19C297EB00EF49E6 /* TSPRecipeCellTableViewCell.h */,
+				F709530E19C297EB00EF49E6 /* TSPRecipeCellTableViewCell.m */,
+			);
+			name = TableViewCells;
+			sourceTree = "<group>";
+		};
+		F795F3D019C64C20000CE1E1 /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				F709531019C2ABED00EF49E6 /* TSPRecipeDetailViewController.h */,
+				F709531119C2ABED00EF49E6 /* TSPRecipeDetailViewController.m */,
+				F709531219C2ABED00EF49E6 /* TSPRecipeDetailViewController.xib */,
+			);
+			name = DetailView;
+			sourceTree = "<group>";
+		};
+		F795F3D119C64C41000CE1E1 /* RecipeListView */ = {
+			isa = PBXGroup;
+			children = (
+				F7EB822319BD0E7500564E72 /* TSPRecipeListTableViewController.h */,
+				F7EB822419BD0E7500564E72 /* TSPRecipeListTableViewController.m */,
+				F7EB822519BD0E7500564E72 /* TSPRecipeListTableViewController.xib */,
+			);
+			name = RecipeListView;
+			sourceTree = "<group>";
+		};
+		F795F3D219C64C73000CE1E1 /* IngredientView */ = {
+			isa = PBXGroup;
+			children = (
+				F7EB821E19BD0DFF00564E72 /* TSPAddIngredientViewController.h */,
+				F7EB821F19BD0DFF00564E72 /* TSPAddIngredientViewController.m */,
+				F767D83919C4F30F00D0E467 /* TSPAddIngredientViewController.xib */,
+			);
+			name = IngredientView;
+			sourceTree = "<group>";
+		};
+		F795F3D319C64C8A000CE1E1 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				F795F3B919C550B5000CE1E1 /* TSPWebViewController.h */,
+				F795F3BA19C550B5000CE1E1 /* TSPWebViewController.m */,
+				F795F3BB19C550B5000CE1E1 /* TSPWebViewController.xib */,
+			);
+			name = WebView;
+			sourceTree = "<group>";
+		};
 		F7EB81D719BCFC2E00564E72 = {
 			isa = PBXGroup;
 			children = (
@@ -165,36 +243,18 @@
 		F7EB81E919BCFC2E00564E72 /* Foodini */ = {
 			isa = PBXGroup;
 			children = (
-				F795F3BE19C5C99E000CE1E1 /* WebPreferences.h */,
-				F7B474A519C5172800D0584E /* UIView+Borders.h */,
-				F7B474A619C5172800D0584E /* UIView+Borders.m */,
-				F7B474A219C516C000D0584E /* TSPIngredientCell.h */,
-				F7B474A319C516C000D0584E /* TSPIngredientCell.m */,
-				F709530A19C28DC200EF49E6 /* TSPShortRecipe.h */,
-				F709530B19C28DC200EF49E6 /* TSPShortRecipe.m */,
-				F709531019C2ABED00EF49E6 /* TSPRecipeDetailViewController.h */,
-				F709531119C2ABED00EF49E6 /* TSPRecipeDetailViewController.m */,
-				F709531219C2ABED00EF49E6 /* TSPRecipeDetailViewController.xib */,
-				F72E834C19BE62C200BAE1DB /* ToastView.h */,
-				F72E834D19BE62C200BAE1DB /* ToastView.m */,
+				F795F3CD19C64B4B000CE1E1 /* ObjectClasses */,
+				F795F3CE19C64BCE000CE1E1 /* HelperClasses */,
+				F795F3CF19C64BF9000CE1E1 /* TableViewCells */,
+				F795F3D019C64C20000CE1E1 /* DetailView */,
 				F7EB81F319BCFC2E00564E72 /* TSPAppDelegate.m */,
 				F7EB81F219BCFC2E00564E72 /* TSPAppDelegate.h */,
+				F7EB821219BCFCB200564E72 /* Main.storyboard */,
 				F7EB81F519BCFC2E00564E72 /* Images.xcassets */,
 				F7EB81EA19BCFC2E00564E72 /* Supporting Files */,
-				F7EB821219BCFCB200564E72 /* Main.storyboard */,
-				F72E834719BE36E500BAE1DB /* TSPTableViewCell.h */,
-				F72E834819BE36E500BAE1DB /* TSPTableViewCell.m */,
-				F709530D19C297EB00EF49E6 /* TSPRecipeCellTableViewCell.h */,
-				F709530E19C297EB00EF49E6 /* TSPRecipeCellTableViewCell.m */,
-				F7EB822319BD0E7500564E72 /* TSPRecipeListTableViewController.h */,
-				F7EB822419BD0E7500564E72 /* TSPRecipeListTableViewController.m */,
-				F7EB822519BD0E7500564E72 /* TSPRecipeListTableViewController.xib */,
-				F7EB821E19BD0DFF00564E72 /* TSPAddIngredientViewController.h */,
-				F7EB821F19BD0DFF00564E72 /* TSPAddIngredientViewController.m */,
-				F767D83919C4F30F00D0E467 /* TSPAddIngredientViewController.xib */,
-				F795F3B919C550B5000CE1E1 /* TSPWebViewController.h */,
-				F795F3BA19C550B5000CE1E1 /* TSPWebViewController.m */,
-				F795F3BB19C550B5000CE1E1 /* TSPWebViewController.xib */,
+				F795F3D119C64C41000CE1E1 /* RecipeListView */,
+				F795F3D219C64C73000CE1E1 /* IngredientView */,
+				F795F3D319C64C8A000CE1E1 /* WebView */,
 			);
 			path = Foodini;
 			sourceTree = "<group>";
@@ -313,6 +373,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F795F3D719C68379000CE1E1 /* elephont-light.ttf in Resources */,
 				F72E834B19BE5A7200BAE1DB /* x.png in Resources */,
 				F767D83A19C4F30F00D0E467 /* TSPAddIngredientViewController.xib in Resources */,
 				F795F3CC19C61B4F000CE1E1 /* foodini_logo_nav.png in Resources */,
@@ -347,6 +408,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7EB822119BD0DFF00564E72 /* TSPAddIngredientViewController.m in Sources */,
+				F795F3D619C650C6000CE1E1 /* Loader.m in Sources */,
 				F72E834E19BE62C200BAE1DB /* ToastView.m in Sources */,
 				F7B474A419C516C000D0584E /* TSPIngredientCell.m in Sources */,
 				F709530C19C28DC200EF49E6 /* TSPShortRecipe.m in Sources */,
