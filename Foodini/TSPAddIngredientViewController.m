@@ -14,10 +14,18 @@
 #import "Loader.h"
 #import <objc/runtime.h>
 
+#define BRAND_GREEN [UIColor colorWithRed:0.89 green:0.94 blue:0.61 alpha:1]
+#define BRAND_RED [UIColor colorWithRed:0.95 green:0.43 blue:0.33 alpha:1]
+#define BRAND_BEIGE [UIColor colorWithRed:0.88 green:0.82 blue:0.75 alpha:0.75]
+#define BRAND_DARK [UIColor colorWithRed:0.28 green:0.28 blue:0.29 alpha:1]
+
 @interface TSPAddIngredientViewController ()
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *searchRecipesButton;
 @property NSMutableArray *aIngredients;
 @property UINavigationBar *bar;
+@property UIView *navBorder;
+@property UIView *logoImg;
+@property UIView *rootView;
 
 @end
 
@@ -26,29 +34,33 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIColor *teddycolor = [UIColor colorWithRed:0.88 green:0.82 blue:0.75 alpha:0.75];
-    
-    // Nav styles, etc...
-    self.bar = self.navigationController.navigationBar;
-    self.bar.barTintColor = [UIColor colorWithRed:0.18 green:0.19 blue:0.24 alpha:0.75];
-    self.bar.tintColor = [UIColor colorWithRed:0.95 green:0.43 blue:0.33 alpha:1];
-    self.bar.translucent = YES;
-    
-    UIView *headerView = [[UIView alloc] init];
-    headerView.frame = CGRectMake(53, 7, 107, self.bar.frame.size.height);
-    UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"foodini_logo_nav.png"]];
-    imgView.frame = CGRectMake(0, -2, 107, self.bar.frame.size.height);
-    imgView.contentMode = UIViewContentModeScaleAspectFit;
+    _rootView = [[[UIApplication sharedApplication] keyWindow]
+                        rootViewController].view;
 
-    [headerView addSubview:imgView];
-//    [self.navigationController.navigationBar insertSubview:imgView atIndex:1]; // better way for logo in nav, just need to hide it on layout animation
-    UIView *navBorder = [[UIView alloc] initWithFrame:CGRectMake(0, _bar.frame.size.height-1, _bar.frame.size.width, 1)];
+    // Nav styles, etc...
     
-    [navBorder setBackgroundColor:[UIColor colorWithRed:0.89 green:0.94 blue:0.61 alpha:1]];
-    [navBorder setOpaque:YES];
-    [navBorder setTag:666];
-    [_bar addSubview:navBorder];
-    [self.navigationItem setTitleView:headerView];
+    _bar = self.navigationController.navigationBar;
+    _bar.barTintColor = [UIColor colorWithRed:0.18 green:0.19 blue:0.24 alpha:0.75];
+    _bar.tintColor = [UIColor colorWithRed:0.95 green:0.43 blue:0.33 alpha:1];
+    _bar.translucent = YES;
+
+    //
+    // logo
+    //
+    
+    _logoImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"foodini_logo_nav.png"]];
+    _logoImg.frame = CGRectMake(0, self.bar.frame.origin.y, 107, self.bar.frame.size.height);
+    _logoImg.contentMode = UIViewContentModeScaleAspectFit;
+    
+    //
+    // NAVBAR BORDER
+    //
+    _navBorder = [[UIView alloc] initWithFrame:CGRectMake(0, _bar.frame.size.height-1, _bar.frame.size.width, 1)];
+    UIView *border = _navBorder;
+    [border setBackgroundColor:BRAND_GREEN];
+    [border setOpaque:YES];
+    [self.bar addSubview:border];
+    
 
     if (self.aIngredients == nil) {
         self.aIngredients = [[NSMutableArray alloc] init];
@@ -58,22 +70,14 @@
     self.AddIngredientTable.separatorColor = [UIColor colorWithHue:0.0 saturation:0.0 brightness:0.0 alpha:0.75];
     
     
-    self.AddIngredientTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@" Whatcha got?" attributes:@{NSForegroundColorAttributeName: teddycolor}];
+    self.AddIngredientTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@" Whatcha got?" attributes:@{NSForegroundColorAttributeName: BRAND_BEIGE}];
     self.AddIngredientTextField.textColor = [UIColor colorWithRed:0.88 green:0.82 blue:0.75 alpha:1];
     
     [self.AddIngredientTextField becomeFirstResponder];
     
 }
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-
-//    if (self.navigationItem.hidesBackButton) {
-//        CGRect frame = self.navigationItem.titleView.frame;
-//        frame.origin.x = 10;
-//        self.navigationItem.titleView.frame = frame;
-//    }
+-(void)viewWillAppear:(BOOL)animated {
+    [_rootView insertSubview:_logoImg atIndex:2];
 }
 
 - (void)didReceiveMemoryWarning
@@ -103,19 +107,12 @@
         [ToastView showToastInParentView:self.view withText:@"First, enter an ingredient." withDuaration:2.0];
     }
 }
+//
+// Reposition navBorder on OrientationChange
+//
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    
-    for (UIView *subview in [self.bar subviews]) {
-        if (subview.tag == 666) {
-            [subview setAlpha:0.0];
-        }
-    }
-    
-    UIView *navBorder = [[UIView alloc] initWithFrame:CGRectMake(0, self.bar.frame.size.height-1,self.bar.frame.size.width, 1)];
-    [navBorder setBackgroundColor:[UIColor colorWithRed:0.89 green:0.94 blue:0.61 alpha:1]];
-    [navBorder setOpaque:YES];
-    [navBorder setTag:666];
-    [self.bar insertSubview:navBorder atIndex:1];
+    _navBorder.frame = CGRectMake(0, _bar.frame.size.height-1, _bar.frame.size.width, 1);
+    _logoImg.frame = CGRectMake(0, self.bar.frame.origin.y, 107, self.bar.frame.size.height);
 }
 
 #pragma mark - Table Handling
@@ -146,7 +143,7 @@
     if ([self.aIngredients count] > 0) {
         return YES;
     } else {
-        [ToastView showToastInParentView:self.view withText:@"You haven't added any ingrediets" withDuaration:2.0];
+        [ToastView showToastInParentView:self.view withText:@"You haven't added any ingredients" withDuaration:2.0];
         return NO;
     }
 }
@@ -156,6 +153,7 @@
         NSString *queryString = [self getQueryString];
         TSPRecipeListTableViewController *shortRecipeListController = (TSPRecipeListTableViewController *) segue.destinationViewController;
         shortRecipeListController.queryString = queryString;
+        [_logoImg removeFromSuperview];
     }
 }
 
