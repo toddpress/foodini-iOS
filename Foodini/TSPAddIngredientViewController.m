@@ -55,23 +55,23 @@
     //
     // NAVBAR BORDER
     //
-    _navBorder = [[UIView alloc] initWithFrame:CGRectMake(0, _bar.frame.size.height-1, _bar.frame.size.width, 1)];
+    _navBorder = [[UIView alloc] initWithFrame:CGRectMake(0, self.bar.frame.size.height-1, self.bar.frame.size.width, 1)];
     UIView *border = _navBorder;
     [border setBackgroundColor:BRAND_GREEN];
     [border setOpaque:YES];
     [self.bar addSubview:border];
     
 
-    if (self.aIngredients == nil) {
-        self.aIngredients = [[NSMutableArray alloc] init];
+    if (_aIngredients == nil) {
+        _aIngredients = [[NSMutableArray alloc] init];
     }
     
-    self.AddIngredientTable.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.AddIngredientTable.separatorColor = [UIColor colorWithHue:0.0 saturation:0.0 brightness:0.0 alpha:0.75];
+    _AddIngredientTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _AddIngredientTable.separatorColor = [UIColor colorWithHue:0.0 saturation:0.0 brightness:0.0 alpha:0.75];
     
     
-    self.AddIngredientTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@" Whatcha got?" attributes:@{NSForegroundColorAttributeName: BRAND_BEIGE}];
-    self.AddIngredientTextField.textColor = [UIColor colorWithRed:0.88 green:0.82 blue:0.75 alpha:1];
+    _AddIngredientTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@" Whatcha got?" attributes:@{NSForegroundColorAttributeName: BRAND_BEIGE}];
+    _AddIngredientTextField.textColor = [UIColor colorWithRed:0.88 green:0.82 blue:0.75 alpha:1];
     
     [self.AddIngredientTextField becomeFirstResponder];
     
@@ -92,17 +92,16 @@
 - (IBAction)removeIngredient:(id)sender {
     TSPTableViewCell *cell = (TSPTableViewCell *)  objc_getAssociatedObject(sender, @"removeIngredientButton");
     NSInteger indexPath = [[self.AddIngredientTable indexPathForCell:cell] row];
-    [self.aIngredients removeObjectAtIndex:indexPath];
-    [self.AddIngredientTable reloadData];
+    [_aIngredients removeObjectAtIndex:indexPath];
+    [_AddIngredientTable reloadData];
 }
 
 - (IBAction)addIngredient:(id)sender {
     if (self.AddIngredientTextField.text.length > 0) {
-        NSString *trimmedString = [self.AddIngredientTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        NSString *currentIngredient = [[NSString alloc] initWithString:trimmedString];
+        NSString *currentIngredient = [self.AddIngredientTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         [self.aIngredients addObject:currentIngredient];
         [self.AddIngredientTable reloadData];
-        self.AddIngredientTextField.text = @"";
+        _AddIngredientTextField.text = @"";
     } else {
         [ToastView showToastInParentView:self.view withText:@"First, enter an ingredient." withDuaration:2.0];
     }
@@ -153,7 +152,7 @@
         NSString *queryString = [self getQueryString];
         TSPRecipeListTableViewController *shortRecipeListController = (TSPRecipeListTableViewController *) segue.destinationViewController;
         shortRecipeListController.queryString = queryString;
-        [_logoImg removeFromSuperview];
+        [self.logoImg removeFromSuperview];
     }
 }
 
