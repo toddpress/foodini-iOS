@@ -5,22 +5,21 @@
 //  Created by Todd Presley on 9/7/14.
 //  Copyright (c) 2014 thocknice. All rights reserved.
 //
-
-#import "TSPAddIngredientViewController.h"
-#import "TSPRecipeListTableViewController.h"
-#import "TSPTableViewCell.h"
-#import "ToastView.h"
-#import "UIView+Borders.h"
-#import "Loader.h"
 #import <objc/runtime.h>
+#import "TSPAddIngredientViewController.h"
+#import "TSPTableViewCell.h"
 
-#define BRAND_GREEN [UIColor colorWithRed:0.89 green:0.94 blue:0.61 alpha:1]
-#define BRAND_RED [UIColor colorWithRed:0.95 green:0.43 blue:0.33 alpha:1]
-#define BRAND_BEIGE [UIColor colorWithRed:0.88 green:0.82 blue:0.75 alpha:0.75]
-#define BRAND_DARK [UIColor colorWithRed:0.28 green:0.28 blue:0.29 alpha:1]
+#import "TSPRecipeListTableViewController.h"
+
+#import "ToastView.h"
+#import "Loader.h"
+
+#import "Constants.h"
 
 @interface TSPAddIngredientViewController ()
+
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *searchRecipesButton;
+
 @property NSMutableArray *aIngredients;
 @property UINavigationBar *bar;
 @property UIView *navBorder;
@@ -37,24 +36,23 @@
     _rootView = [[[UIApplication sharedApplication] keyWindow]
                         rootViewController].view;
 
-    // Nav styles, etc...
+    //
+    // Navigation Bar Styling, etc
+    //
     
     _bar = self.navigationController.navigationBar;
     _bar.barTintColor = [UIColor colorWithRed:0.18 green:0.19 blue:0.24 alpha:0.75];
-    _bar.tintColor = [UIColor colorWithRed:0.95 green:0.43 blue:0.33 alpha:1];
+    _bar.tintColor = BRAND_RED;
     _bar.translucent = YES;
-
-    //
+    
     // logo
-    //
     
     _logoImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"foodini_logo_nav.png"]];
     _logoImg.frame = CGRectMake(0, self.bar.frame.origin.y, 107, self.bar.frame.size.height);
     _logoImg.contentMode = UIViewContentModeScaleAspectFit;
     
-    //
-    // NAVBAR BORDER
-    //
+    // bottom border
+    
     _navBorder = [[UIView alloc] initWithFrame:CGRectMake(0, self.bar.frame.size.height-1, self.bar.frame.size.width, 1)];
     UIView *border = _navBorder;
     [border setBackgroundColor:BRAND_GREEN];
@@ -106,9 +104,7 @@
         [ToastView showToastInParentView:self.view withText:@"First, enter an ingredient." withDuaration:2.0];
     }
 }
-//
-// Reposition navBorder on OrientationChange
-//
+
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
     _navBorder.frame = CGRectMake(0, _bar.frame.size.height-1, _bar.frame.size.width, 1);
     _logoImg.frame = CGRectMake(0, self.bar.frame.origin.y, 107, self.bar.frame.size.height);
@@ -136,7 +132,11 @@
     return cell;
 }
 
-#pragma mark - segue
+#pragma mark - JSON fetching and seque
+
+/*
+ move all of the asyc json calls here, then transition when loaded or display error msg -- network or null results
+*/
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
     if ([self.aIngredients count] > 0) {

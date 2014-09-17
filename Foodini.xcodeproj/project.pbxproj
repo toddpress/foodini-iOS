@@ -81,6 +81,7 @@
 		F795F3CB19C61B4F000CE1E1 /* foodini_logo_nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = foodini_logo_nav.png; sourceTree = "<group>"; };
 		F795F3D419C650C6000CE1E1 /* Loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Loader.h; sourceTree = "<group>"; };
 		F795F3D519C650C6000CE1E1 /* Loader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Loader.m; sourceTree = "<group>"; };
+		F7ABA41219C98A3300DCEEB6 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		F7B474A219C516C000D0584E /* TSPIngredientCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSPIngredientCell.h; sourceTree = "<group>"; };
 		F7B474A319C516C000D0584E /* TSPIngredientCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSPIngredientCell.m; sourceTree = "<group>"; };
 		F7B474A519C5172800D0584E /* UIView+Borders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Borders.h"; sourceTree = "<group>"; };
@@ -250,6 +251,7 @@
 				F7EB81F319BCFC2E00564E72 /* TSPAppDelegate.m */,
 				F7EB81F219BCFC2E00564E72 /* TSPAppDelegate.h */,
 				F7EB821219BCFCB200564E72 /* Main.storyboard */,
+				F7ABA41219C98A3300DCEEB6 /* Constants.h */,
 				F7EB81F519BCFC2E00564E72 /* Images.xcassets */,
 				F7EB81EA19BCFC2E00564E72 /* Supporting Files */,
 				F795F3D119C64C41000CE1E1 /* RecipeListView */,
