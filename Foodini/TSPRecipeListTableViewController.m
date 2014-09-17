@@ -9,8 +9,10 @@
 #import "TSPRecipeListTableViewController.h"
 #import "TSPRecipeCellTableViewCell.h"
 #import "TSPRecipeDetailViewController.h"
+#import "Constants.h"
 #import "TSPShortRecipe.h"
 #import "UIView+Borders.h"
+#import "Loader.h"
 
 @interface TSPRecipeListTableViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *recipeLabel;
@@ -24,13 +26,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.API_KEY = @"8f6eecce87b5e38ec5d0e3b3e7f2191c";
-    self.API_SEARCH = @"http://food2fork.com/api/search?key=";
-    self.API_GET = @"http://food2fork.com/api/get?key=";
-    
-    self.recipeTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
+    self.recipeTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     [self getShortRecipes];
 }
 
@@ -42,11 +40,11 @@
 }
 
 #pragma mark - JSON loading
-
 - (void)getShortRecipes {
+    
     self.aRecipes = [[NSMutableArray alloc] init];
     NSError *error;
-    NSString *strURL = [NSString stringWithFormat:@"%@%@&q=%@", self.API_SEARCH, self.API_KEY, self.queryString];
+    NSString *strURL = [NSString stringWithFormat:@"%@%@&q=%@", API_SEARCH, API_KEY, self.queryString];
     NSURL *url = [NSURL URLWithString:strURL];
     NSData* data = [[NSData alloc ] initWithContentsOfURL: url];
     if (data != nil) {
@@ -111,7 +109,7 @@
         detailController.recipeUrl = selectedRecipe.recipe_url;
 
         NSError *error;
-        NSString *strURL = [NSString stringWithFormat:@"%@%@&rId=%@", self.API_GET, self.API_KEY, selectedRecipe.recipe_id];
+        NSString *strURL = [NSString stringWithFormat:@"%@%@&rId=%@", API_GET, API_KEY, selectedRecipe.recipe_id];
         NSURL *url = [NSURL URLWithString:strURL];
         NSData* data = [[NSData alloc ] initWithContentsOfURL: url];
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];

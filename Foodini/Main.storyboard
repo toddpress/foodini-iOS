@@ -119,11 +119,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="mh1-EM-1v3">
-                        <barButtonItem key="leftBarButtonItem" id="IF9-R3-YfV" propertyAccessControl="none"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="E4U-2E-whE">
                             <color key="tintColor" red="0.80392156862745101" green="0.92549019607843142" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="searchRecipes:" destination="uuo-QA-hmx" id="3rQ-l8-X7c"/>
+                                <action selector="searchTouched:" destination="uuo-QA-hmx" id="7UI-y2-fJi"/>
                                 <segue destination="I34-Ji-9aW" kind="push" identifier="SegueToShortRecipes" id="5xn-NE-Jhk"/>
                             </connections>
                         </barButtonItem>
@@ -131,6 +130,7 @@
                     <connections>
                         <outlet property="AddIngredientTable" destination="hmi-LJ-fyB" id="5BH-3P-58j"/>
                         <outlet property="AddIngredientTextField" destination="0cD-L5-fmV" id="ckB-sg-hOC"/>
+                        <outlet property="searchRecipesButton" destination="E4U-2E-whE" id="Bji-eb-ZLM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tve-lS-DiZ" userLabel="First Responder" sceneMemberID="firstResponder"/>

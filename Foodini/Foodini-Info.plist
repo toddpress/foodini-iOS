@@ -4,8 +4,7 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Elephont-Light.otf</string>
-		<string>elephont-light.ttf</string>
+		<string>Elephont Light</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>

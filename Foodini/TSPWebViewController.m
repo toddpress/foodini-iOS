@@ -8,7 +8,6 @@
 
 #import "TSPWebViewController.h"
 #import "TSPRecipeListTableViewController.h"
-#import "WebPreferences.h"
 
 @interface TSPWebViewController ()
 
