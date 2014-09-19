@@ -68,8 +68,9 @@
     _AddIngredientTable.separatorColor = [UIColor colorWithHue:0.0 saturation:0.0 brightness:0.0 alpha:0.75];
     
     
-    _AddIngredientTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@" Whatcha got?" attributes:@{NSForegroundColorAttributeName: BRAND_BEIGE}];
-    _AddIngredientTextField.textColor = [UIColor colorWithRed:0.88 green:0.82 blue:0.75 alpha:1];
+    _AddIngredientTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@" Whatcha got?"
+                                                                                    attributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:0.88 green:0.82 blue:0.75 alpha:0.75]}];
+    _AddIngredientTextField.textColor = BRAND_BEIGE;
     
     [self.AddIngredientTextField becomeFirstResponder];
     
