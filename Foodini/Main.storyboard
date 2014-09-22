@@ -71,7 +71,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="fOo-ci-nbM">
-                                                    <rect key="frame" x="46" y="0.0" width="234" height="42"/>
+                                                    <rect key="frame" x="46" y="-8" width="234" height="58"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -81,7 +81,7 @@
                                             <constraints>
                                                 <constraint firstItem="Fd3-tJ-zOb" firstAttribute="top" secondItem="JSw-m2-btg" secondAttribute="topMargin" constant="-2" id="0x5-Lc-7V0"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="Fd3-tJ-zOb" secondAttribute="bottom" id="9mZ-u6-caq"/>
-                                                <constraint firstItem="fOo-ci-nbM" firstAttribute="top" secondItem="JSw-m2-btg" secondAttribute="top" id="H72-AH-AtS"/>
+                                                <constraint firstItem="fOo-ci-nbM" firstAttribute="top" secondItem="JSw-m2-btg" secondAttribute="top" constant="-8" id="H72-AH-AtS"/>
                                                 <constraint firstItem="Fd3-tJ-zOb" firstAttribute="leading" secondItem="JSw-m2-btg" secondAttribute="leadingMargin" id="Hg9-BB-rDP"/>
                                                 <constraint firstItem="fOo-ci-nbM" firstAttribute="leading" secondItem="Fd3-tJ-zOb" secondAttribute="trailing" constant="8" symbolic="YES" id="Q60-ud-Q5q"/>
                                                 <constraint firstAttribute="trailing" secondItem="fOo-ci-nbM" secondAttribute="trailing" id="efs-9j-kCl"/>
@@ -251,16 +251,29 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="12" preferredMaxLayoutWidth="261" translatesAutoresizingMaskIntoConstraints="NO" id="9ma-Zf-w5a">
-                                                                    <rect key="frame" x="24" y="8" width="257" height="28"/>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron_right_green.png" translatesAutoresizingMaskIntoConstraints="NO" id="IcL-Tt-3lR">
+                                                                    <rect key="frame" x="8" y="18" width="8" height="8"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="8" id="3pq-Ug-qer"/>
+                                                                        <constraint firstAttribute="width" constant="8" id="R49-yO-f74"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="9ma-Zf-w5a">
+                                                                    <rect key="frame" x="24" y="0.0" width="257" height="42"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <color key="textColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="chevron_right_green.png" translatesAutoresizingMaskIntoConstraints="NO" id="IcL-Tt-3lR">
-                                                                    <rect key="frame" x="8" y="18" width="8" height="8"/>
-                                                                </imageView>
                                                             </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="9ma-Zf-w5a" firstAttribute="top" secondItem="Omr-Ud-nkw" secondAttribute="topMargin" constant="-8" id="1Kj-fh-c0e"/>
+                                                                <constraint firstItem="IcL-Tt-3lR" firstAttribute="top" secondItem="Omr-Ud-nkw" secondAttribute="topMargin" constant="10" id="60z-cV-wba"/>
+                                                                <constraint firstItem="9ma-Zf-w5a" firstAttribute="centerY" secondItem="IcL-Tt-3lR" secondAttribute="centerY" constant="-1" id="AG0-ik-gEO"/>
+                                                                <constraint firstAttribute="bottomMargin" secondItem="9ma-Zf-w5a" secondAttribute="bottom" constant="-6" id="JAw-sz-o4H"/>
+                                                                <constraint firstAttribute="trailingMargin" secondItem="9ma-Zf-w5a" secondAttribute="trailing" constant="-8" id="W7l-LX-nZR"/>
+                                                                <constraint firstItem="IcL-Tt-3lR" firstAttribute="leading" secondItem="Omr-Ud-nkw" secondAttribute="leading" constant="8" id="hCZ-kp-ANz"/>
+                                                                <constraint firstItem="9ma-Zf-w5a" firstAttribute="leading" secondItem="IcL-Tt-3lR" secondAttribute="trailing" constant="8" id="oIc-BO-lrf"/>
+                                                            </constraints>
                                                         </tableViewCellContentView>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
