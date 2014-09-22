@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="pjL-bP-oBm">
     <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -119,11 +120,13 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="mh1-EM-1v3">
+                        <barButtonItem key="leftBarButtonItem" title="Foodini" id="aJi-9u-PJc">
+                            <color key="tintColor" red="0.94117647410000005" green="0.33725491169999999" blue="0.2392156869" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="E4U-2E-whE">
                             <color key="tintColor" red="0.80392156862745101" green="0.92549019607843142" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="searchTouched:" destination="uuo-QA-hmx" id="7UI-y2-fJi"/>
-                                <segue destination="I34-Ji-9aW" kind="push" identifier="SegueToShortRecipes" id="5xn-NE-Jhk"/>
+                                <action selector="searchRecipesClicked:" destination="uuo-QA-hmx" id="hcp-tD-Dah"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -131,6 +134,7 @@
                         <outlet property="AddIngredientTable" destination="hmi-LJ-fyB" id="5BH-3P-58j"/>
                         <outlet property="AddIngredientTextField" destination="0cD-L5-fmV" id="ckB-sg-hOC"/>
                         <outlet property="searchRecipesButton" destination="E4U-2E-whE" id="Bji-eb-ZLM"/>
+                        <segue destination="I34-Ji-9aW" kind="push" identifier="SegueToShortRecipes" id="8cp-BX-wVg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tve-lS-DiZ" userLabel="First Responder" sceneMemberID="firstResponder"/>

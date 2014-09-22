@@ -22,12 +22,9 @@
 
 @property NSMutableArray *ingredientsArray;
 @property NSArray *recipesArray;
-@property BOOL isLoadingData;
 
 @property UINavigationBar *bar;
 @property UIView *navBorder;
-@property UIView *rootView;
-@property UIImageView *logoImage;
 @property UIBarButtonItem *leftButton;
 
 @end
@@ -35,13 +32,9 @@
 @implementation TSPAddIngredientViewController
 // TODO eliminate any unneeded NSOperationQueues
 // TODO move navigation bar stuff
-// TODO put logo in barbutton instead
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _rootView = [[[UIApplication sharedApplication] keyWindow]
-                        rootViewController].view;
     //
     // Navigation Bar Styling, etc
     //
@@ -67,7 +60,6 @@
     [self.bar addSubview:border];
     
     _ingredientsArray = [[NSMutableArray alloc] init];
-    _isLoadingData = NO;
     
     _AddIngredientTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     _AddIngredientTable.separatorColor = [UIColor colorWithHue:0.0 saturation:0.0 brightness:0.0 alpha:0.75];
