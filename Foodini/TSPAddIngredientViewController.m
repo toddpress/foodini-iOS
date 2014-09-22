@@ -6,51 +6,58 @@
 //  Copyright (c) 2014 thocknice. All rights reserved.
 //
 #import <objc/runtime.h>
+#import "Constants.h"
 #import "TSPAddIngredientViewController.h"
 #import "TSPTableViewCell.h"
 
 #import "TSPRecipeListTableViewController.h"
 
+#import "TSPShortRecipe.h"
 #import "ToastView.h"
-#import "Loader.h"
 
-#import "Constants.h"
 
 @interface TSPAddIngredientViewController ()
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *searchRecipesButton;
 
-@property NSMutableArray *aIngredients;
+@property NSMutableArray *ingredientsArray;
+@property NSArray *recipesArray;
+@property BOOL isLoadingData;
+
 @property UINavigationBar *bar;
 @property UIView *navBorder;
-@property UIView *logoImg;
 @property UIView *rootView;
+@property UIImageView *logoImage;
+@property UIBarButtonItem *leftButton;
 
 @end
 
 @implementation TSPAddIngredientViewController
+// TODO eliminate any unneeded NSOperationQueues
+// TODO move navigation bar stuff
+// TODO put logo in barbutton instead
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     _rootView = [[[UIApplication sharedApplication] keyWindow]
                         rootViewController].view;
-
     //
     // Navigation Bar Styling, etc
     //
-    
+
     _bar = self.navigationController.navigationBar;
     _bar.barTintColor = [UIColor colorWithRed:0.18 green:0.19 blue:0.24 alpha:0.75];
     _bar.tintColor = BRAND_RED;
     _bar.translucent = YES;
     
     // logo
+    _leftButton = self.navigationItem.leftBarButtonItem;
+    _leftButton.enabled = NO;
+    NSDictionary *leftButtonAppearance = @{NSFontAttributeName: [UIFont fontWithName:@"Elephont-Light" size:26.0],
+                                           NSForegroundColorAttributeName: BRAND_RED};
     
-    _logoImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"foodini_logo_nav.png"]];
-    _logoImg.frame = CGRectMake(0, self.bar.frame.origin.y, 107, self.bar.frame.size.height);
-    _logoImg.contentMode = UIViewContentModeScaleAspectFit;
-    
+    [_leftButton setTitleTextAttributes:leftButtonAppearance forState:UIControlStateNormal];
     // bottom border
     
     _navBorder = [[UIView alloc] initWithFrame:CGRectMake(0, self.bar.frame.size.height-1, self.bar.frame.size.width, 1)];
@@ -59,10 +66,8 @@
     [border setOpaque:YES];
     [self.bar addSubview:border];
     
-
-    if (_aIngredients == nil) {
-        _aIngredients = [[NSMutableArray alloc] init];
-    }
+    _ingredientsArray = [[NSMutableArray alloc] init];
+    _isLoadingData = NO;
     
     _AddIngredientTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     _AddIngredientTable.separatorColor = [UIColor colorWithHue:0.0 saturation:0.0 brightness:0.0 alpha:0.75];
@@ -74,9 +79,6 @@
     
     [self.AddIngredientTextField becomeFirstResponder];
     
-}
--(void)viewWillAppear:(BOOL)animated {
-    [_rootView insertSubview:_logoImg atIndex:2];
 }
 
 - (void)didReceiveMemoryWarning
@@ -91,24 +93,118 @@
 - (IBAction)removeIngredient:(id)sender {
     TSPTableViewCell *cell = (TSPTableViewCell *)  objc_getAssociatedObject(sender, @"removeIngredientButton");
     NSInteger indexPath = [[self.AddIngredientTable indexPathForCell:cell] row];
-    [_aIngredients removeObjectAtIndex:indexPath];
+    [_ingredientsArray removeObjectAtIndex:indexPath];
     [_AddIngredientTable reloadData];
 }
 
 - (IBAction)addIngredient:(id)sender {
     if (self.AddIngredientTextField.text.length > 0) {
         NSString *currentIngredient = [self.AddIngredientTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        [self.aIngredients addObject:currentIngredient];
+        [self.ingredientsArray addObject:currentIngredient];
         [self.AddIngredientTable reloadData];
         _AddIngredientTextField.text = @"";
     } else {
-        [ToastView showToastInParentView:self.view withText:@"First, enter an ingredient." withDuaration:2.0];
+        [ToastView showToastInParentView:self.view
+                                withText:@"First, enter an ingredient."
+                           withDuaration:2.0];
     }
 }
 
+#pragma mark - JSON fetching and seque
+
+- (IBAction)searchRecipesClicked:(id)sender {
+    UIButton *btn = (UIButton *)sender;
+    
+    if ([_ingredientsArray count] == 0){
+        [ToastView showToastInParentView:self.view
+                                withText:@"You haven't added any ingredients"
+                           withDuaration:2.0];
+        return;
+    }
+    
+    btn.enabled = NO;
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+
+    NSString *parameters = [@"search?key=" stringByAppendingFormat:@"%@&q=%@", API_KEY, [self getQueryString]];
+    NSString *stringURL = [API_BASE_URL stringByAppendingString:parameters];
+    NSURL *url = [[NSURL alloc] initWithString:stringURL];
+    
+    [NSURLConnection sendAsynchronousRequest:[[NSURLRequest alloc] initWithURL:url]
+                                       queue:[[NSOperationQueue alloc] init]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                               
+                               if (connectionError) {
+                                   [self showToastOnMainThread:@"Trouble connecting. Check internet connection."];
+                                   NSLog(@"%@", @"no connection");
+                               } else {
+                                   [self buildRecipesFromJSON:data];
+                               }
+                               
+                               [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                               btn.enabled = YES;
+                           }];
+}
+
+- (NSString *)getQueryString {
+    return [[self.ingredientsArray copy] componentsJoinedByString:@","];
+}
+
+- (void)buildRecipesFromJSON:(NSData *)objectNotation {
+    NSError *error = nil;
+    NSDictionary *parsedObject = [NSJSONSerialization JSONObjectWithData:objectNotation options:0 error:&error];
+    if (error != nil) {
+        
+        [self showToastOnMainThread:@"An error occured."];
+        NSLog(@"%@", @"error occured");
+
+    } else if ([[parsedObject valueForKey:@"count"] integerValue] == 0) {
+        
+        [self showToastOnMainThread:@"No recpes found for ingredients."];
+        NSLog(@"%@", @"no recipes found");
+        
+    } else {
+        NSMutableArray *recipes = [[NSMutableArray alloc] init];
+        NSArray *results = [parsedObject valueForKey:@"recipes"];
+        
+        for (NSDictionary *recipeDic in results) {
+            
+            TSPShortRecipe *recipe = [[TSPShortRecipe alloc] init];
+            
+            for (NSString *key in recipeDic) {
+                if ([recipe respondsToSelector:NSSelectorFromString(key)]) {
+                    [recipe setValue:[recipeDic valueForKey:key] forKey:key];
+                }
+            }
+            
+            [recipes addObject:recipe];
+            
+        }
+        _recipesArray = recipes;
+
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+            [self performSegueWithIdentifier:@"SegueToShortRecipes" sender:self];
+        }];
+        
+    }
+}
+
+- (void)showToastOnMainThread:(NSString *)text {
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [ToastView showToastInParentView:self.view withText:text withDuaration:2.0];
+    }];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"SegueToShortRecipes"]) {
+        TSPRecipeListTableViewController *shortRecipeListController = (TSPRecipeListTableViewController *) segue.destinationViewController;
+        shortRecipeListController.recipesArray = _recipesArray;
+    }
+}
+
+#pragma mark - orientation handling
+
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
     _navBorder.frame = CGRectMake(0, _bar.frame.size.height-1, _bar.frame.size.width, 1);
-    _logoImg.frame = CGRectMake(0, self.bar.frame.origin.y, 107, self.bar.frame.size.height);
 }
 
 #pragma mark - Table Handling
@@ -119,13 +215,13 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.aIngredients count];
+    return [self.ingredientsArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    NSString *ingredient = [self.aIngredients objectAtIndex:indexPath.row];
+    NSString *ingredient = [self.ingredientsArray objectAtIndex:indexPath.row];
     TSPTableViewCell *cell = (TSPTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"removeIngredientCell" forIndexPath:indexPath];
    
     cell.ingredientLabel.text = ingredient;
@@ -133,31 +229,4 @@
     return cell;
 }
 
-#pragma mark - JSON fetching and seque
-
-/*
- move all of the asyc json calls here, then transition when loaded or display error msg -- network or null results
-*/
-
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
-    if ([self.aIngredients count] > 0) {
-        return YES;
-    } else {
-        [ToastView showToastInParentView:self.view withText:@"You haven't added any ingredients" withDuaration:2.0];
-        return NO;
-    }
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"SegueToShortRecipes"]) {
-        NSString *queryString = [self getQueryString];
-        TSPRecipeListTableViewController *shortRecipeListController = (TSPRecipeListTableViewController *) segue.destinationViewController;
-        shortRecipeListController.queryString = queryString;
-        [self.logoImg removeFromSuperview];
-    }
-}
-
-- (NSString *)getQueryString {
-    return [[self.aIngredients copy] componentsJoinedByString:@","];
-}
 @end
