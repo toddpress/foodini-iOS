@@ -5,19 +5,17 @@
 //  Created by Todd Presley on 9/7/14.
 //  Copyright (c) 2014 thocknice. All rights reserved.
 //
-
+#import "Constants.h"
 #import "TSPRecipeListTableViewController.h"
 #import "TSPRecipeCellTableViewCell.h"
 #import "TSPRecipeDetailViewController.h"
-#import "Constants.h"
 #import "TSPShortRecipe.h"
-#import "UIView+Borders.h"
-#import "Loader.h"
+
 
 @interface TSPRecipeListTableViewController ()
-@property (strong, nonatomic) IBOutlet UILabel *recipeLabel;
+
 @property (strong, nonatomic) IBOutlet UITableView *recipeTableView;
-@property NSMutableArray *aRecipes;
+
 @end
 
 
@@ -28,8 +26,6 @@
     [super viewDidLoad];
 
     self.recipeTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    [self getShortRecipes];
 }
 
 - (void)didReceiveMemoryWarning
@@ -37,29 +33,6 @@
     [super didReceiveMemoryWarning];
     
     // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - JSON loading
-- (void)getShortRecipes {
-    
-    self.aRecipes = [[NSMutableArray alloc] init];
-    NSError *error;
-    NSString *strURL = [NSString stringWithFormat:@"%@%@&q=%@", API_SEARCH, API_KEY, self.queryString];
-    NSURL *url = [NSURL URLWithString:strURL];
-    NSData* data = [[NSData alloc ] initWithContentsOfURL: url];
-    if (data != nil) {
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-        
-        for (NSDictionary *recipe in json[@"recipes"]) {
-            TSPShortRecipe *recipeObject = [[TSPShortRecipe alloc] init];
-            recipeObject.title = recipe[@"title"];
-            recipeObject.image_url = recipe[@"image_url"];
-            recipeObject.recipe_id = recipe[@"recipe_id"];
-            recipeObject.recipe_url = recipe[@"source_url"];
-            [self.aRecipes addObject:recipeObject];
-            NSLog(@"RECIPE: %@", recipeObject);
-        }
-    }
 }
 
 #pragma mark - Table view data source
@@ -72,7 +45,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.aRecipes count];
+    return [_recipesArray count];
 }
 
 
@@ -83,7 +56,7 @@
     if (cell == nil) {
         cell = [[TSPRecipeCellTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"recipeCell"];
     }
-    TSPShortRecipe *recipe = [self.aRecipes objectAtIndex:indexPath.row];
+    TSPShortRecipe *recipe = [_recipesArray objectAtIndex:indexPath.row];
     cell.recipeTitle.text = recipe.title;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         //fetch the image data from the url
@@ -101,7 +74,7 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"SegueToDetail"]){
         NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
-        TSPShortRecipe *selectedRecipe = [self.aRecipes objectAtIndex:indexPath.row];
+        TSPShortRecipe *selectedRecipe = [_recipesArray objectAtIndex:indexPath.row];
         TSPRecipeDetailViewController *detailController = segue.destinationViewController;
         
         detailController.titleText = selectedRecipe.title;
@@ -121,8 +94,5 @@
     }
     
 }
-//#pragma mark - Table view delegate
-
-
 
 @end

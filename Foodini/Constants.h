@@ -14,3 +14,4 @@
 #define API_KEY @"8f6eecce87b5e38ec5d0e3b3e7f2191c"
 #define API_SEARCH @"http://food2fork.com/api/search?key="
 #define API_GET @"http://food2fork.com/api/get?key="
+#define API_BASE_URL @"http://food2fork.com/api/"
