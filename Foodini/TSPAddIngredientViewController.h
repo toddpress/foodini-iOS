@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TSPAddIngredientViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface TSPAddIngredientViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *AddIngredientTable;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @property (weak, nonatomic) IBOutlet UITextField *AddIngredientTextField;
 

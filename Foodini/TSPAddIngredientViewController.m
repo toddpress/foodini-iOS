@@ -8,7 +8,7 @@
 #import <objc/runtime.h>
 #import "Constants.h"
 #import "TSPAddIngredientViewController.h"
-#import "TSPTableViewCell.h"
+#import "IngredientCollectionViewCell.h"
 
 #import "TSPRecipeListTableViewController.h"
 
@@ -29,12 +29,21 @@
 
 @end
 
-@implementation TSPAddIngredientViewController
+@implementation TSPAddIngredientViewController {
+    IngredientCollectionViewCell *sizingCell;
+}
 // TODO eliminate any unneeded NSOperationQueues
 // TODO move navigation bar stuff
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // collection
+    
+    UINib *cellNib = [UINib nibWithNibName:@"IngredientViewCell" bundle:nil];
+    [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"ItemView"];
+    sizingCell = [[cellNib instantiateWithOwner:nil options:nil] objectAtIndex:0];
+    
     //
     // Navigation Bar Styling, etc
     //
@@ -61,9 +70,6 @@
     
     _ingredientsArray = [[NSMutableArray alloc] init];
     
-    _AddIngredientTable.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _AddIngredientTable.separatorColor = [UIColor colorWithHue:0.0 saturation:0.0 brightness:0.0 alpha:0.75];
-    
     
     _AddIngredientTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@" Whatcha got?"
                                                                                     attributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:0.88 green:0.82 blue:0.75 alpha:0.75]}];
@@ -83,18 +89,21 @@
 
 
 - (IBAction)removeIngredient:(id)sender {
-    TSPTableViewCell *cell = (TSPTableViewCell *)  objc_getAssociatedObject(sender, @"removeIngredientButton");
-    NSInteger indexPath = [[self.AddIngredientTable indexPathForCell:cell] row];
-    [_ingredientsArray removeObjectAtIndex:indexPath];
-    [_AddIngredientTable reloadData];
+//    IngredientCollectionViewCell *cell =  objc_getAssociatedObject(sender, @"removeIngredientButton");
+    UIView *senderButton = (UIView*) sender;
+    NSIndexPath *indexPath = [_collectionView indexPathForCell: (UICollectionViewCell *)[[senderButton superview]superview]];
+    
+    [_ingredientsArray removeObjectAtIndex:indexPath.row];
+    [_collectionView reloadData];
 }
 
 - (IBAction)addIngredient:(id)sender {
     if (self.AddIngredientTextField.text.length > 0) {
         NSString *currentIngredient = [self.AddIngredientTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         [self.ingredientsArray addObject:currentIngredient];
-        [self.AddIngredientTable reloadData];
+        [self.collectionView reloadData];
         _AddIngredientTextField.text = @"";
+        NSLog(@"%@", _ingredientsArray);
     } else {
         [ToastView showToastInParentView:self.view
                                 withText:@"First, enter an ingredient."
@@ -201,24 +210,28 @@
 
 #pragma mark - Table Handling
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return [self.ingredientsArray count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
 
     NSString *ingredient = [self.ingredientsArray objectAtIndex:indexPath.row];
-    TSPTableViewCell *cell = (TSPTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"removeIngredientCell" forIndexPath:indexPath];
+    IngredientCollectionViewCell *cell = (IngredientCollectionViewCell  *)[collectionView dequeueReusableCellWithReuseIdentifier:@"ItemView" forIndexPath:indexPath];
    
     cell.ingredientLabel.text = ingredient;
-    objc_setAssociatedObject(cell.ingredientCellButton, @"removeIngredientButton", cell, 1);
+    [cell.removeIngredientButton addTarget:self action:@selector(removeIngredient:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }
-
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    return [sizingCell systemLayoutSizeFittingSize:UILayoutFittingExpandedSize];
+}
 @end
