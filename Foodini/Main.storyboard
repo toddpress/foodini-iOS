@@ -47,10 +47,10 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <collectionView autoresizesSubviews="NO" multipleTouchEnabled="YES" contentMode="redraw" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PgV-Qj-ApM">
-                                <rect key="frame" x="20" y="147" width="284" height="430"/>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PgV-Qj-ApM">
+                                <rect key="frame" x="20" y="169" width="284" height="408"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Vm0-5X-Qgi">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="15" minimumInteritemSpacing="5" id="Vm0-5X-Qgi">
                                     <size key="itemSize" width="0.0" height="0.0"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -77,7 +77,7 @@
                             <constraint firstItem="0cD-L5-fmV" firstAttribute="leading" secondItem="PvB-J4-3wZ" secondAttribute="leadingMargin" constant="4" id="glF-lT-vb5"/>
                             <constraint firstItem="eY3-cx-I8y" firstAttribute="bottom" secondItem="0cD-L5-fmV" secondAttribute="bottom" id="jtG-tS-kXM"/>
                             <constraint firstItem="T70-q8-duu" firstAttribute="top" secondItem="PgV-Qj-ApM" secondAttribute="bottom" constant="-9" id="lpa-b6-Bty"/>
-                            <constraint firstItem="PgV-Qj-ApM" firstAttribute="top" secondItem="0cD-L5-fmV" secondAttribute="bottom" constant="8" id="lxL-w7-zCO"/>
+                            <constraint firstItem="PgV-Qj-ApM" firstAttribute="top" secondItem="0cD-L5-fmV" secondAttribute="bottom" constant="30" id="lxL-w7-zCO"/>
                             <constraint firstItem="0cD-L5-fmV" firstAttribute="top" secondItem="Zeq-yc-hBT" secondAttribute="bottom" constant="35" id="nvV-i6-62a"/>
                         </constraints>
                     </view>

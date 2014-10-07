@@ -200,8 +200,8 @@
 		F795F3D219C64C73000CE1E1 /* IngredientView */ = {
 			isa = PBXGroup;
 			children = (
-				F7EB821E19BD0DFF00564E72 /* TSPAddIngredientViewController.h */,
 				F7EB821F19BD0DFF00564E72 /* TSPAddIngredientViewController.m */,
+				F7EB821E19BD0DFF00564E72 /* TSPAddIngredientViewController.h */,
 				F767D83919C4F30F00D0E467 /* TSPAddIngredientViewController.xib */,
 			);
 			name = IngredientView;

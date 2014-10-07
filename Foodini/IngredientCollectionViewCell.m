@@ -22,7 +22,7 @@
     [path fill];
     
     // red outline
-    [BRAND_DARK setStroke];
+    [[UIColor clearColor] setStroke];
     [path stroke];
 }
 

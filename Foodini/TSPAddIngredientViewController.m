@@ -215,23 +215,26 @@
     return 1;
 }
 
+- (void)_configureCell:(IngredientCollectionViewCell *)cell forIndexPath:(NSIndexPath *)indexPath {
+    cell.ingredientLabel.text = [self.ingredientsArray objectAtIndex:indexPath.row];
+}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return [self.ingredientsArray count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    NSString *ingredient = [self.ingredientsArray objectAtIndex:indexPath.row];
     IngredientCollectionViewCell *cell = (IngredientCollectionViewCell  *)[collectionView dequeueReusableCellWithReuseIdentifier:@"ItemView" forIndexPath:indexPath];
-   
-    cell.ingredientLabel.text = ingredient;
+    [self _configureCell:cell forIndexPath:indexPath];
     [cell.removeIngredientButton addTarget:self action:@selector(removeIngredient:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    [self _configureCell:sizingCell forIndexPath:indexPath];
     return [sizingCell systemLayoutSizeFittingSize:UILayoutFittingExpandedSize];
 }
+
 @end
