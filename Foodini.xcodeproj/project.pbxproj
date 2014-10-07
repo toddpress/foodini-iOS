@@ -11,17 +11,19 @@
 		F709530F19C297EB00EF49E6 /* TSPRecipeCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F709530E19C297EB00EF49E6 /* TSPRecipeCellTableViewCell.m */; };
 		F709531319C2ABED00EF49E6 /* TSPRecipeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F709531119C2ABED00EF49E6 /* TSPRecipeDetailViewController.m */; };
 		F709531419C2ABED00EF49E6 /* TSPRecipeDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F709531219C2ABED00EF49E6 /* TSPRecipeDetailViewController.xib */; };
+		F726B64419E3D377002609FD /* TSPLeftFlowViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F726B64319E3D377002609FD /* TSPLeftFlowViewLayout.m */; };
+		F726B64619E3FAC6002609FD /* IngredientViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F726B64519E3FAC6002609FD /* IngredientViewCell.xib */; };
 		F72E834919BE36E500BAE1DB /* TSPTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F72E834819BE36E500BAE1DB /* TSPTableViewCell.m */; };
 		F72E834B19BE5A7200BAE1DB /* x.png in Resources */ = {isa = PBXBuildFile; fileRef = F72E834A19BE5A7200BAE1DB /* x.png */; };
 		F72E834E19BE62C200BAE1DB /* ToastView.m in Sources */ = {isa = PBXBuildFile; fileRef = F72E834D19BE62C200BAE1DB /* ToastView.m */; };
 		F73D920719C4489E00C4E92C /* chevron_right.png in Resources */ = {isa = PBXBuildFile; fileRef = F73D920619C4489E00C4E92C /* chevron_right.png */; };
+		F7404DE619DF2523007780E0 /* IngredientCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7404DE419DF2523007780E0 /* IngredientCollectionViewCell.m */; };
 		F767D83A19C4F30F00D0E467 /* TSPAddIngredientViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F767D83919C4F30F00D0E467 /* TSPAddIngredientViewController.xib */; };
 		F795F3B619C54B75000CE1E1 /* chevron_right_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = F795F3B519C54B75000CE1E1 /* chevron_right_gray.png */; };
 		F795F3B819C54C6A000CE1E1 /* chevron_right_green.png in Resources */ = {isa = PBXBuildFile; fileRef = F795F3B719C54C6A000CE1E1 /* chevron_right_green.png */; };
 		F795F3BC19C550B5000CE1E1 /* TSPWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F795F3BA19C550B5000CE1E1 /* TSPWebViewController.m */; };
 		F795F3BD19C550B5000CE1E1 /* TSPWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F795F3BB19C550B5000CE1E1 /* TSPWebViewController.xib */; };
 		F795F3CC19C61B4F000CE1E1 /* foodini_logo_nav.png in Resources */ = {isa = PBXBuildFile; fileRef = F795F3CB19C61B4F000CE1E1 /* foodini_logo_nav.png */; };
-		F795F3D619C650C6000CE1E1 /* Loader.m in Sources */ = {isa = PBXBuildFile; fileRef = F795F3D519C650C6000CE1E1 /* Loader.m */; };
 		F795F3D719C68379000CE1E1 /* elephont-light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F795F3C319C5FBB6000CE1E1 /* elephont-light.ttf */; };
 		F7B474A419C516C000D0584E /* TSPIngredientCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B474A319C516C000D0584E /* TSPIngredientCell.m */; };
 		F7B474A719C5172800D0584E /* UIView+Borders.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B474A619C5172800D0584E /* UIView+Borders.m */; };
@@ -63,12 +65,17 @@
 		F709531019C2ABED00EF49E6 /* TSPRecipeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSPRecipeDetailViewController.h; sourceTree = "<group>"; };
 		F709531119C2ABED00EF49E6 /* TSPRecipeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSPRecipeDetailViewController.m; sourceTree = "<group>"; };
 		F709531219C2ABED00EF49E6 /* TSPRecipeDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TSPRecipeDetailViewController.xib; sourceTree = "<group>"; };
+		F726B64219E3D377002609FD /* TSPLeftFlowViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSPLeftFlowViewLayout.h; sourceTree = "<group>"; };
+		F726B64319E3D377002609FD /* TSPLeftFlowViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSPLeftFlowViewLayout.m; sourceTree = "<group>"; };
+		F726B64519E3FAC6002609FD /* IngredientViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IngredientViewCell.xib; sourceTree = "<group>"; };
 		F72E834719BE36E500BAE1DB /* TSPTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSPTableViewCell.h; sourceTree = "<group>"; };
 		F72E834819BE36E500BAE1DB /* TSPTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSPTableViewCell.m; sourceTree = "<group>"; };
 		F72E834A19BE5A7200BAE1DB /* x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = x.png; sourceTree = "<group>"; };
 		F72E834C19BE62C200BAE1DB /* ToastView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToastView.h; sourceTree = "<group>"; };
 		F72E834D19BE62C200BAE1DB /* ToastView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToastView.m; sourceTree = "<group>"; };
 		F73D920619C4489E00C4E92C /* chevron_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chevron_right.png; sourceTree = "<group>"; };
+		F7404DE319DF2523007780E0 /* IngredientCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IngredientCollectionViewCell.h; sourceTree = "<group>"; };
+		F7404DE419DF2523007780E0 /* IngredientCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IngredientCollectionViewCell.m; sourceTree = "<group>"; };
 		F767D83919C4F30F00D0E467 /* TSPAddIngredientViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TSPAddIngredientViewController.xib; sourceTree = "<group>"; };
 		F795F3B519C54B75000CE1E1 /* chevron_right_gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chevron_right_gray.png; sourceTree = "<group>"; };
 		F795F3B719C54C6A000CE1E1 /* chevron_right_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chevron_right_green.png; sourceTree = "<group>"; };
@@ -77,8 +84,6 @@
 		F795F3BB19C550B5000CE1E1 /* TSPWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TSPWebViewController.xib; sourceTree = "<group>"; };
 		F795F3C319C5FBB6000CE1E1 /* elephont-light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "elephont-light.ttf"; sourceTree = "<group>"; };
 		F795F3CB19C61B4F000CE1E1 /* foodini_logo_nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = foodini_logo_nav.png; sourceTree = "<group>"; };
-		F795F3D419C650C6000CE1E1 /* Loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Loader.h; sourceTree = "<group>"; };
-		F795F3D519C650C6000CE1E1 /* Loader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Loader.m; sourceTree = "<group>"; };
 		F7ABA41219C98A3300DCEEB6 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		F7B474A219C516C000D0584E /* TSPIngredientCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSPIngredientCell.h; sourceTree = "<group>"; };
 		F7B474A319C516C000D0584E /* TSPIngredientCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSPIngredientCell.m; sourceTree = "<group>"; };
@@ -134,6 +139,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F726B63E19E3D2B3002609FD /* SubclassedUIViews */ = {
+			isa = PBXGroup;
+			children = (
+				F726B64219E3D377002609FD /* TSPLeftFlowViewLayout.h */,
+				F726B64319E3D377002609FD /* TSPLeftFlowViewLayout.m */,
+			);
+			name = SubclassedUIViews;
+			sourceTree = "<group>";
+		};
 		F795F3CD19C64B4B000CE1E1 /* ObjectClasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,8 +164,6 @@
 				F7B474A619C5172800D0584E /* UIView+Borders.m */,
 				F72E834C19BE62C200BAE1DB /* ToastView.h */,
 				F72E834D19BE62C200BAE1DB /* ToastView.m */,
-				F795F3D419C650C6000CE1E1 /* Loader.h */,
-				F795F3D519C650C6000CE1E1 /* Loader.m */,
 			);
 			name = HelperClasses;
 			sourceTree = "<group>";
@@ -165,6 +177,9 @@
 				F72E834819BE36E500BAE1DB /* TSPTableViewCell.m */,
 				F709530D19C297EB00EF49E6 /* TSPRecipeCellTableViewCell.h */,
 				F709530E19C297EB00EF49E6 /* TSPRecipeCellTableViewCell.m */,
+				F7404DE319DF2523007780E0 /* IngredientCollectionViewCell.h */,
+				F726B64519E3FAC6002609FD /* IngredientViewCell.xib */,
+				F7404DE419DF2523007780E0 /* IngredientCollectionViewCell.m */,
 			);
 			name = TableViewCells;
 			sourceTree = "<group>";
@@ -192,8 +207,8 @@
 		F795F3D219C64C73000CE1E1 /* IngredientView */ = {
 			isa = PBXGroup;
 			children = (
-				F7EB821E19BD0DFF00564E72 /* TSPAddIngredientViewController.h */,
 				F7EB821F19BD0DFF00564E72 /* TSPAddIngredientViewController.m */,
+				F7EB821E19BD0DFF00564E72 /* TSPAddIngredientViewController.h */,
 				F767D83919C4F30F00D0E467 /* TSPAddIngredientViewController.xib */,
 			);
 			name = IngredientView;
@@ -242,6 +257,7 @@
 		F7EB81E919BCFC2E00564E72 /* Foodini */ = {
 			isa = PBXGroup;
 			children = (
+				F726B63E19E3D2B3002609FD /* SubclassedUIViews */,
 				F795F3CD19C64B4B000CE1E1 /* ObjectClasses */,
 				F795F3CE19C64BCE000CE1E1 /* HelperClasses */,
 				F795F3CF19C64BF9000CE1E1 /* TableViewCells */,
@@ -383,6 +399,7 @@
 				F7EB81EE19BCFC2E00564E72 /* InfoPlist.strings in Resources */,
 				F795F3B619C54B75000CE1E1 /* chevron_right_gray.png in Resources */,
 				F7EB81F619BCFC2E00564E72 /* Images.xcassets in Resources */,
+				F726B64619E3FAC6002609FD /* IngredientViewCell.xib in Resources */,
 				F795F3B819C54C6A000CE1E1 /* chevron_right_green.png in Resources */,
 				F709531419C2ABED00EF49E6 /* TSPRecipeDetailViewController.xib in Resources */,
 				F73D920719C4489E00C4E92C /* chevron_right.png in Resources */,
@@ -406,15 +423,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7EB822119BD0DFF00564E72 /* TSPAddIngredientViewController.m in Sources */,
-				F795F3D619C650C6000CE1E1 /* Loader.m in Sources */,
 				F72E834E19BE62C200BAE1DB /* ToastView.m in Sources */,
 				F7B474A419C516C000D0584E /* TSPIngredientCell.m in Sources */,
 				F709530C19C28DC200EF49E6 /* TSPShortRecipe.m in Sources */,
 				F7EB81F419BCFC2E00564E72 /* TSPAppDelegate.m in Sources */,
 				F709530F19C297EB00EF49E6 /* TSPRecipeCellTableViewCell.m in Sources */,
+				F7404DE619DF2523007780E0 /* IngredientCollectionViewCell.m in Sources */,
 				F709531319C2ABED00EF49E6 /* TSPRecipeDetailViewController.m in Sources */,
 				F7B474A719C5172800D0584E /* UIView+Borders.m in Sources */,
 				F7EB81F019BCFC2E00564E72 /* main.m in Sources */,
+				F726B64419E3D377002609FD /* TSPLeftFlowViewLayout.m in Sources */,
 				F795F3BC19C550B5000CE1E1 /* TSPWebViewController.m in Sources */,
 				F72E834919BE36E500BAE1DB /* TSPTableViewCell.m in Sources */,
 				F7EB822619BD0E7500564E72 /* TSPRecipeListTableViewController.m in Sources */,

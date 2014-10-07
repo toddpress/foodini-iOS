@@ -8,7 +8,7 @@
 #import <objc/runtime.h>
 #import "Constants.h"
 #import "TSPAddIngredientViewController.h"
-#import "TSPTableViewCell.h"
+#import "IngredientCollectionViewCell.h"
 
 #import "TSPRecipeListTableViewController.h"
 
@@ -29,20 +29,26 @@
 
 @end
 
-@implementation TSPAddIngredientViewController
+@implementation TSPAddIngredientViewController {
+    IngredientCollectionViewCell *sizingCell;
+}
 // TODO eliminate any unneeded NSOperationQueues
 // TODO move navigation bar stuff
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // collection
+    
+    UINib *cellNib = [UINib nibWithNibName:@"IngredientViewCell" bundle:nil];
+    [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"ItemView"];
+    sizingCell = [[cellNib instantiateWithOwner:nil options:nil] objectAtIndex:0];
+    
     //
     // Navigation Bar Styling, etc
     //
 
     _bar = self.navigationController.navigationBar;
-    _bar.barTintColor = [UIColor colorWithRed:0.18 green:0.19 blue:0.24 alpha:0.75];
-    _bar.tintColor = BRAND_RED;
-    _bar.translucent = YES;
     
     // logo
     _leftButton = self.navigationItem.leftBarButtonItem;
@@ -55,14 +61,12 @@
     
     _navBorder = [[UIView alloc] initWithFrame:CGRectMake(0, self.bar.frame.size.height-1, self.bar.frame.size.width, 1)];
     UIView *border = _navBorder;
+    
     [border setBackgroundColor:BRAND_GREEN];
     [border setOpaque:YES];
     [self.bar addSubview:border];
     
     _ingredientsArray = [[NSMutableArray alloc] init];
-    
-    _AddIngredientTable.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _AddIngredientTable.separatorColor = [UIColor colorWithHue:0.0 saturation:0.0 brightness:0.0 alpha:0.75];
     
     
     _AddIngredientTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@" Whatcha got?"
@@ -83,18 +87,26 @@
 
 
 - (IBAction)removeIngredient:(id)sender {
-    TSPTableViewCell *cell = (TSPTableViewCell *)  objc_getAssociatedObject(sender, @"removeIngredientButton");
-    NSInteger indexPath = [[self.AddIngredientTable indexPathForCell:cell] row];
-    [_ingredientsArray removeObjectAtIndex:indexPath];
-    [_AddIngredientTable reloadData];
+    UIView *senderButton = (UIView*) sender;
+    NSIndexPath *indexPath = [_collectionView indexPathForCell: (UICollectionViewCell *)[[senderButton superview]superview]];
+    [_ingredientsArray removeObjectAtIndex:indexPath.row];
+    [_collectionView reloadData];
+
 }
 
 - (IBAction)addIngredient:(id)sender {
     if (self.AddIngredientTextField.text.length > 0) {
         NSString *currentIngredient = [self.AddIngredientTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        [self.ingredientsArray addObject:currentIngredient];
-        [self.AddIngredientTable reloadData];
+        if (![_ingredientsArray containsObject:currentIngredient]) {
+            [self.ingredientsArray addObject:currentIngredient];
+            [self.collectionView reloadData];
+        } else {
+            [ToastView showToastInParentView:self.view
+                                    withText:@"Ingredient already added."
+                               withDuaration:2.0];
+        }
         _AddIngredientTextField.text = @"";
+        NSLog(@"%@", _ingredientsArray);
     } else {
         [ToastView showToastInParentView:self.view
                                 withText:@"First, enter an ingredient."
@@ -201,24 +213,31 @@
 
 #pragma mark - Table Handling
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (void)_configureCell:(IngredientCollectionViewCell *)cell forIndexPath:(NSIndexPath *)indexPath {
+    cell.ingredientLabel.text = [self.ingredientsArray objectAtIndex:indexPath.row];
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return [self.ingredientsArray count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    NSString *ingredient = [self.ingredientsArray objectAtIndex:indexPath.row];
-    TSPTableViewCell *cell = (TSPTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"removeIngredientCell" forIndexPath:indexPath];
-   
-    cell.ingredientLabel.text = ingredient;
-    objc_setAssociatedObject(cell.ingredientCellButton, @"removeIngredientButton", cell, 1);
+    IngredientCollectionViewCell *cell = (IngredientCollectionViewCell  *)[collectionView dequeueReusableCellWithReuseIdentifier:@"ItemView" forIndexPath:indexPath];
+    [self _configureCell:cell forIndexPath:indexPath];
+    [cell.removeIngredientButton addTarget:self action:@selector(removeIngredient:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self _configureCell:sizingCell forIndexPath:indexPath];
+    return [sizingCell systemLayoutSizeFittingSize:UILayoutFittingExpandedSize];
 }
 
 @end

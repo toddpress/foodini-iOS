@@ -71,6 +71,7 @@
     });
     return cell;
 }
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"SegueToDetail"]){
         NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
