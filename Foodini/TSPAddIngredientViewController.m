@@ -49,9 +49,6 @@
     //
 
     _bar = self.navigationController.navigationBar;
-    _bar.barTintColor = [UIColor colorWithRed:0.18 green:0.19 blue:0.24 alpha:0.75];
-    _bar.tintColor = BRAND_RED;
-    _bar.translucent = YES;
     
     // logo
     _leftButton = self.navigationItem.leftBarButtonItem;
@@ -64,6 +61,7 @@
     
     _navBorder = [[UIView alloc] initWithFrame:CGRectMake(0, self.bar.frame.size.height-1, self.bar.frame.size.width, 1)];
     UIView *border = _navBorder;
+    
     [border setBackgroundColor:BRAND_GREEN];
     [border setOpaque:YES];
     [self.bar addSubview:border];
@@ -89,19 +87,24 @@
 
 
 - (IBAction)removeIngredient:(id)sender {
-//    IngredientCollectionViewCell *cell =  objc_getAssociatedObject(sender, @"removeIngredientButton");
     UIView *senderButton = (UIView*) sender;
     NSIndexPath *indexPath = [_collectionView indexPathForCell: (UICollectionViewCell *)[[senderButton superview]superview]];
-    
     [_ingredientsArray removeObjectAtIndex:indexPath.row];
     [_collectionView reloadData];
+
 }
 
 - (IBAction)addIngredient:(id)sender {
     if (self.AddIngredientTextField.text.length > 0) {
         NSString *currentIngredient = [self.AddIngredientTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        [self.ingredientsArray addObject:currentIngredient];
-        [self.collectionView reloadData];
+        if (![_ingredientsArray containsObject:currentIngredient]) {
+            [self.ingredientsArray addObject:currentIngredient];
+            [self.collectionView reloadData];
+        } else {
+            [ToastView showToastInParentView:self.view
+                                    withText:@"Ingredient already added."
+                               withDuaration:2.0];
+        }
         _AddIngredientTextField.text = @"";
         NSLog(@"%@", _ingredientsArray);
     } else {

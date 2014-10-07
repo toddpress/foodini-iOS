@@ -7,11 +7,17 @@
 //
 
 #import "TSPAppDelegate.h"
+#import "Constants.h"
 
 @implementation TSPAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    [[UINavigationBar appearance] setTintColor:BRAND_RED];
+    [[UINavigationBar appearance] setBarTintColor: [UIColor colorWithRed:0.18 green:0.19 blue:0.24 alpha:0.75]];
+    [[UINavigationBar appearance] setTranslucent:YES];
+    
     [self.window makeKeyAndVisible];
     return YES;
 }

@@ -38,7 +38,6 @@
             </view>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="OAJ-9b-cu3" firstAttribute="top" secondItem="h5v-9u-NPh" secondAttribute="top" constant="4" id="0ys-EE-sfr"/>
                 <constraint firstAttribute="centerY" secondItem="OAJ-9b-cu3" secondAttribute="centerY" id="2xS-7u-rjc"/>
                 <constraint firstItem="OAJ-9b-cu3" firstAttribute="leading" secondItem="h5v-9u-NPh" secondAttribute="leading" constant="5" id="4bg-DI-vcQ"/>
                 <constraint firstItem="jvC-q5-pZq" firstAttribute="top" secondItem="h5v-9u-NPh" secondAttribute="top" constant="10" id="6WV-in-x1J"/>

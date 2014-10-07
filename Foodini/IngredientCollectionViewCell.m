@@ -17,12 +17,12 @@
     CGRect insetRect = CGRectInset(rect, 0.5, 0.5);
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:insetRect cornerRadius:rect.size.height/4.0];
     
-    // white background
+    // background color
     [[UIColor clearColor] setFill];
     [path fill];
     
-    // red outline
-    [[UIColor clearColor] setStroke];
+    // border color
+    [BRAND_GREEN setStroke];
     [path stroke];
 }
 
