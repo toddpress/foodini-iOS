@@ -29,6 +29,8 @@
 		F7B474A719C5172800D0584E /* UIView+Borders.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B474A619C5172800D0584E /* UIView+Borders.m */; };
 		F7D5A46519C4DD98002BDF25 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = F7D5A46419C4DD98002BDF25 /* plus.png */; };
 		F7D5A46719C4E4EF002BDF25 /* foodini_bg_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F7D5A46619C4E4EF002BDF25 /* foodini_bg_1.jpg */; };
+		F7E923F419E46B4E006B0E5A /* greenBorder1px.png in Resources */ = {isa = PBXBuildFile; fileRef = F7E923F319E46B4E006B0E5A /* greenBorder1px.png */; };
+		F7E923F619E46F51006B0E5A /* darkBorder1px.png in Resources */ = {isa = PBXBuildFile; fileRef = F7E923F519E46F51006B0E5A /* darkBorder1px.png */; };
 		F7EB81E419BCFC2E00564E72 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7EB81E319BCFC2E00564E72 /* Foundation.framework */; };
 		F7EB81E619BCFC2E00564E72 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7EB81E519BCFC2E00564E72 /* CoreGraphics.framework */; };
 		F7EB81E819BCFC2E00564E72 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7EB81E719BCFC2E00564E72 /* UIKit.framework */; };
@@ -91,6 +93,8 @@
 		F7B474A619C5172800D0584E /* UIView+Borders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Borders.m"; sourceTree = "<group>"; };
 		F7D5A46419C4DD98002BDF25 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
 		F7D5A46619C4E4EF002BDF25 /* foodini_bg_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = foodini_bg_1.jpg; sourceTree = "<group>"; };
+		F7E923F319E46B4E006B0E5A /* greenBorder1px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenBorder1px.png; sourceTree = "<group>"; };
+		F7E923F519E46F51006B0E5A /* darkBorder1px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = darkBorder1px.png; sourceTree = "<group>"; };
 		F7EB81E019BCFC2E00564E72 /* Foodini.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Foodini.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7EB81E319BCFC2E00564E72 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F7EB81E519BCFC2E00564E72 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -278,6 +282,8 @@
 		F7EB81EA19BCFC2E00564E72 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F7E923F519E46F51006B0E5A /* darkBorder1px.png */,
+				F7E923F319E46B4E006B0E5A /* greenBorder1px.png */,
 				F795F3CB19C61B4F000CE1E1 /* foodini_logo_nav.png */,
 				F795F3C319C5FBB6000CE1E1 /* elephont-light.ttf */,
 				F795F3B719C54C6A000CE1E1 /* chevron_right_green.png */,
@@ -391,6 +397,7 @@
 				F795F3D719C68379000CE1E1 /* elephont-light.ttf in Resources */,
 				F72E834B19BE5A7200BAE1DB /* x.png in Resources */,
 				F767D83A19C4F30F00D0E467 /* TSPAddIngredientViewController.xib in Resources */,
+				F7E923F419E46B4E006B0E5A /* greenBorder1px.png in Resources */,
 				F795F3CC19C61B4F000CE1E1 /* foodini_logo_nav.png in Resources */,
 				F7D5A46519C4DD98002BDF25 /* plus.png in Resources */,
 				F7EB822719BD0E7500564E72 /* TSPRecipeListTableViewController.xib in Resources */,
@@ -400,6 +407,7 @@
 				F795F3B619C54B75000CE1E1 /* chevron_right_gray.png in Resources */,
 				F7EB81F619BCFC2E00564E72 /* Images.xcassets in Resources */,
 				F726B64619E3FAC6002609FD /* IngredientViewCell.xib in Resources */,
+				F7E923F619E46F51006B0E5A /* darkBorder1px.png in Resources */,
 				F795F3B819C54C6A000CE1E1 /* chevron_right_green.png in Resources */,
 				F709531419C2ABED00EF49E6 /* TSPRecipeDetailViewController.xib in Resources */,
 				F73D920719C4489E00C4E92C /* chevron_right.png in Resources */,

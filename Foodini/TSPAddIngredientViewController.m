@@ -22,18 +22,15 @@
 
 @property NSMutableArray *ingredientsArray;
 @property NSArray *recipesArray;
-
-@property UINavigationBar *bar;
-@property UIView *navBorder;
 @property UIBarButtonItem *leftButton;
+@property BOOL ingredientsArrayHasChanged;
 
 @end
 
 @implementation TSPAddIngredientViewController {
     IngredientCollectionViewCell *sizingCell;
 }
-// TODO eliminate any unneeded NSOperationQueues
-// TODO move navigation bar stuff
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -47,26 +44,18 @@
     //
     // Navigation Bar Styling, etc
     //
-
-    _bar = self.navigationController.navigationBar;
     
-    // logo
+    // Logo
+    
     _leftButton = self.navigationItem.leftBarButtonItem;
     _leftButton.enabled = NO;
     NSDictionary *leftButtonAppearance = @{NSFontAttributeName: [UIFont fontWithName:@"Elephont-Light" size:26.0],
                                            NSForegroundColorAttributeName: BRAND_RED};
     
     [_leftButton setTitleTextAttributes:leftButtonAppearance forState:UIControlStateNormal];
-    // bottom border
-    
-    _navBorder = [[UIView alloc] initWithFrame:CGRectMake(0, self.bar.frame.size.height-1, self.bar.frame.size.width, 1)];
-    UIView *border = _navBorder;
-    
-    [border setBackgroundColor:BRAND_GREEN];
-    [border setOpaque:YES];
-    [self.bar addSubview:border];
     
     _ingredientsArray = [[NSMutableArray alloc] init];
+    _ingredientsArrayHasChanged = NO;
     
     
     _AddIngredientTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@" Whatcha got?"
@@ -87,17 +76,19 @@
 
 
 - (IBAction)removeIngredient:(id)sender {
+    _ingredientsArrayHasChanged = YES;
     UIView *senderButton = (UIView*) sender;
     NSIndexPath *indexPath = [_collectionView indexPathForCell: (UICollectionViewCell *)[[senderButton superview]superview]];
     [_ingredientsArray removeObjectAtIndex:indexPath.row];
     [_collectionView reloadData];
-
+    
 }
 
 - (IBAction)addIngredient:(id)sender {
     if (self.AddIngredientTextField.text.length > 0) {
         NSString *currentIngredient = [self.AddIngredientTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         if (![_ingredientsArray containsObject:currentIngredient]) {
+            _ingredientsArrayHasChanged = YES;
             [self.ingredientsArray addObject:currentIngredient];
             [self.collectionView reloadData];
         } else {
@@ -126,27 +117,32 @@
         return;
     }
     
-    btn.enabled = NO;
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-
-    NSString *parameters = [@"search?key=" stringByAppendingFormat:@"%@&q=%@", API_KEY, [self getQueryString]];
-    NSString *stringURL = [API_BASE_URL stringByAppendingString:parameters];
-    NSURL *url = [[NSURL alloc] initWithString:stringURL];
-    
-    [NSURLConnection sendAsynchronousRequest:[[NSURLRequest alloc] initWithURL:url]
-                                       queue:[[NSOperationQueue alloc] init]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-                               
-                               if (connectionError) {
-                                   [self showToastOnMainThread:@"Trouble connecting. Check internet connection."];
-                                   NSLog(@"%@", @"no connection");
-                               } else {
-                                   [self buildRecipesFromJSON:data];
-                               }
-                               
-                               [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-                               btn.enabled = YES;
-                           }];
+    if(_ingredientsArrayHasChanged) {
+        _ingredientsArrayHasChanged = NO;
+        btn.enabled = NO;
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        
+        NSString *parameters = [@"search?key=" stringByAppendingFormat:@"%@&q=%@", API_KEY, [self getQueryString]];
+        NSString *stringURL = [API_BASE_URL stringByAppendingString:parameters];
+        NSURL *url = [[NSURL alloc] initWithString:stringURL];
+        
+        [NSURLConnection sendAsynchronousRequest:[[NSURLRequest alloc] initWithURL:url]
+                                           queue:[[NSOperationQueue alloc] init]
+                               completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                                   
+                                   if (connectionError) {
+                                       [self showToastOnMainThread:@"Trouble connecting. Check internet connection."];
+                                       NSLog(@"%@", @"no connection");
+                                   } else {
+                                       [self buildRecipesFromJSON:data];
+                                   }
+                                   
+                                   [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                                   btn.enabled = YES;
+                               }];
+    } else {
+        [self performSegueWithIdentifier:@"SegueToShortRecipes" sender:self];
+    }
 }
 
 - (NSString *)getQueryString {
@@ -203,12 +199,6 @@
         TSPRecipeListTableViewController *shortRecipeListController = (TSPRecipeListTableViewController *) segue.destinationViewController;
         shortRecipeListController.recipesArray = _recipesArray;
     }
-}
-
-#pragma mark - orientation handling
-
--(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    _navBorder.frame = CGRectMake(0, _bar.frame.size.height-1, _bar.frame.size.width, 1);
 }
 
 #pragma mark - Table Handling

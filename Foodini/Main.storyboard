@@ -103,75 +103,6 @@
             </objects>
             <point key="canvasLocation" x="2209" y="14"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="tiy-7X-ApU">
-            <objects>
-                <viewController id="ZGD-mP-pG9" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="LOz-sZ-OGE"/>
-                        <viewControllerLayoutGuide type="bottom" id="uhF-cV-dJy"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="AKM-12-2mV">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="JIj-hr-x3M">
-                                <rect key="frame" x="20" y="70" width="280" height="429"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <color key="sectionIndexBackgroundColor" red="0.85098040100000005" green="0.78039217000000005" blue="0.69803923369999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="removeIngredientCell" id="kLQ-AV-ruf" customClass="TSPTableViewCell">
-                                        <rect key="frame" x="0.0" y="22" width="280" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kLQ-AV-ruf" id="Z3N-XR-KhW">
-                                            <rect key="frame" x="0.0" y="0.0" width="280" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vrw-Lz-RjP">
-                                                    <rect key="frame" x="8" y="6" width="30" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="6MM-5u-qzO"/>
-                                                        <constraint firstAttribute="width" constant="30" id="jRf-CI-vxs"/>
-                                                    </constraints>
-                                                    <state key="normal" backgroundImage="x.png"/>
-                                                </button>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="cva-Sq-SCb">
-                                                    <rect key="frame" x="46" y="-8" width="234" height="58"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstItem="cva-Sq-SCb" firstAttribute="centerY" secondItem="Vrw-Lz-RjP" secondAttribute="centerY" id="2hD-qe-3xx"/>
-                                                <constraint firstItem="Vrw-Lz-RjP" firstAttribute="top" secondItem="Z3N-XR-KhW" secondAttribute="topMargin" constant="-2" id="3hC-oj-1ZK"/>
-                                                <constraint firstItem="cva-Sq-SCb" firstAttribute="top" secondItem="Z3N-XR-KhW" secondAttribute="top" constant="-8" id="56G-Hh-0MM"/>
-                                                <constraint firstAttribute="trailing" secondItem="cva-Sq-SCb" secondAttribute="trailing" id="7u8-K6-ZWq"/>
-                                                <constraint firstItem="Vrw-Lz-RjP" firstAttribute="leading" secondItem="Z3N-XR-KhW" secondAttribute="leadingMargin" id="9x2-us-qu5"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="Vrw-Lz-RjP" secondAttribute="bottom" id="KqI-sB-sOz"/>
-                                                <constraint firstItem="cva-Sq-SCb" firstAttribute="leading" secondItem="Vrw-Lz-RjP" secondAttribute="trailing" constant="8" symbolic="YES" id="O51-MK-2xp"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <outlet property="ingredientLabel" destination="cva-Sq-SCb" id="tNa-tw-hfF"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="uuo-QA-hmx" id="ZST-eT-B8M"/>
-                                    <outlet property="delegate" destination="uuo-QA-hmx" id="kat-nk-Fba"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wid-5I-ux6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2184" y="661"/>
-        </scene>
         <!--Recipes-->
         <scene sceneID="qNl-Fw-1H9">
             <objects>
@@ -179,7 +110,8 @@
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="179" sectionHeaderHeight="22" sectionFooterHeight="22" id="ZFL-xD-Kx2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.180392161" green="0.1921568662" blue="0.2392156869" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="sectionIndexBackgroundColor" red="0.18039216101169586" green="0.19215686619281769" blue="0.23921568691730499" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="recipeCell" rowHeight="179" id="J6k-ra-yTp" customClass="TSPRecipeCellTableViewCell">
                                 <rect key="frame" x="0.0" y="86" width="320" height="229"/>
@@ -203,6 +135,7 @@
                                             <size key="shadowOffset" width="0.0" height="0.0"/>
                                         </label>
                                     </subviews>
+                                    <color key="backgroundColor" red="0.180392161" green="0.1921568662" blue="0.2392156869" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="aQd-jJ-WW8" secondAttribute="bottom" id="9kR-42-y9F"/>
                                         <constraint firstItem="aQd-jJ-WW8" firstAttribute="leading" secondItem="F7f-5V-lH3" secondAttribute="leading" id="Cfg-pk-Xsm"/>
@@ -213,6 +146,7 @@
                                         <constraint firstItem="2kb-kv-rKb" firstAttribute="leading" secondItem="F7f-5V-lH3" secondAttribute="leading" id="zmf-iR-gIp"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.180392161" green="0.1921568662" blue="0.2392156869" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="recipeImage" destination="aQd-jJ-WW8" id="TQ8-cP-lYu"/>
                                     <outlet property="recipeTitle" destination="2kb-kv-rKb" id="c9d-ga-MQj"/>
@@ -451,6 +385,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Jx4-Fp-wYH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -466,7 +401,6 @@
         <image name="chevron_right_green.png" width="600" height="529"/>
         <image name="foodini_bg_1.jpg" width="1080" height="760"/>
         <image name="plus.png" width="256" height="256"/>
-        <image name="x.png" width="256" height="256"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
